@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'enable_notification_in_admin_panel'    => true,
+    'enable_notification_in_admin_panel'    => false,
 
     'firebase_url'                          => 'https://fcm.googleapis.com/v1/projects/laravel-dashboard-c6fde/messages:send',
     'firebase_credentials'                  => storage_path('firebase/firebase-auth.json'),
