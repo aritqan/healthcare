@@ -6,6 +6,7 @@ return [
             'title'                         => 'العامة',
             'fields'                        => [
                 'app_name'                  => 'اسم التطبيق',
+                'app_value'                 => 'نبض',
                 'app_default_language'      => 'لغة التطبيق الافتراضية',
                 'vat_rate'                  => 'نسبة ضريبة القيمة المضافة (%)',
                 'maintenance_mode'          => 'وضع الصيانة',

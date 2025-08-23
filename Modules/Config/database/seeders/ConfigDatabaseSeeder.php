@@ -37,6 +37,9 @@ class ConfigDatabaseSeeder extends Seeder
      */
     private function seedGeneralSettings(): void
     {
+        $settingAppName = createTranslateArray('title', 'settings.groups.general.fields.app_name', 'config');
+        $settingAppValue = createTranslateArray('trans_value', 'settings.groups.general.fields.app_value', 'config');
+
         Setting::updateOrCreate(
             [
                 'group'         => SettingGroups::GENERAL,
@@ -47,7 +50,8 @@ class ConfigDatabaseSeeder extends Seeder
                 'order'         => 1,
                 'is_required'   => true,
                 'translatable'  => true,
-            ] + createTranslateArray('title', 'settings.groups.general.fields.app_name', 'config')
+                'value'         => 'NABD',
+            ] + array_merge_recursive($settingAppName, $settingAppValue)
         );
 
         Setting::updateOrCreate(
@@ -263,6 +267,7 @@ class ConfigDatabaseSeeder extends Seeder
             ],
             [
                 'type'  => SettingTypes::NUMBER,
+                'value' => 25000,
                 'order' => 1,
             ] + array_merge_recursive($translatableSessionLifeTimeTitle, $translatableSessionLifeTimeDescription)
         );

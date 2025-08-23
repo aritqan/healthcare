@@ -44,6 +44,26 @@ return [
             'title'                         => 'Employee',
             'description'                   => 'There are no default permissions for this group',
         ],
+        'clinic'                            => [
+            'name'                          => 'CLINIC',
+            'title'                         => 'Clinic',
+            'description'                   => 'There are no default permissions for this group',
+        ],
+        'pharmacy'                          => [
+            'name'                          => 'PHARMACY',
+            'title'                         => 'Pharmacy',
+            'description'                   => 'There are no default permissions for this group',
+        ],
+        'doctor'                            => [
+            'name'                          => 'DOCTOR',
+            'title'                         => 'Doctor',
+            'description'                   => 'There are no default permissions for this group',
+        ],
+        'pharmacist'                        => [
+            'name'                          => 'PHARMACIST',
+            'title'                         => 'Pharmacist',
+            'description'                   => 'There are no default permissions for this group',
+        ],
     ],
 
     'main_roles'                            => [

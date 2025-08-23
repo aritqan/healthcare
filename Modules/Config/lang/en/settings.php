@@ -6,6 +6,7 @@ return [
             'title'                         => 'General',
             'fields'                        => [
                 'app_name'                  => 'App Title',
+                'app_value'                 => 'NABD',
                 'app_default_language'      => 'App Default Language',
                 'vat_rate'                  => 'VAT Rate (%)',
                 'maintenance_mode'          => 'Maintenance Mode',

@@ -44,6 +44,26 @@ return [
             'title'                         => 'الموظف',
             'description'                   => 'لا توجد صلاحيات إفتراضية لهذه المجموعة',
         ],
+        'clinic'                            => [
+            'name'                          => 'CLINIC',
+            'title'                         => 'العيادة',
+            'description'                   => 'لا توجد صلاحيات إفتراضية لهذه المجموعة',
+        ],
+        'pharmacy'                          => [
+            'name'                          => 'PHARMACY',
+            'title'                         => 'الصيدلية',
+            'description'                   => 'لا توجد صلاحيات إفتراضية لهذه المجموعة',
+        ],
+        'doctor'                            => [
+            'name'                          => 'DOCTOR',
+            'title'                         => 'الطبيب',
+            'description'                   => 'لا توجد صلاحيات إفتراضية لهذه المجموعة',
+        ],
+        'pharmacist'                        => [
+            'name'                          => 'PHARMACIST',
+            'title'                         => 'الصيدلي',
+            'description'                   => 'لا توجد صلاحيات إفتراضية لهذه المجموعة',
+        ],
     ],
 
     'main_roles'                            => [
