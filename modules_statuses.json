@@ -8,5 +8,6 @@
     "Notification": true,
     "Crm": true,
     "Log": true,
-    "Zms": true
+    "Zms": true,
+    "Nabd": true
 }

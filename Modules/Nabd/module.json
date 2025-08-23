@@ -1,0 +1,11 @@
+{
+    "name": "Nabd",
+    "alias": "nabd",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Nabd\\Providers\\NabdServiceProvider"
+    ],
+    "files": []
+}
