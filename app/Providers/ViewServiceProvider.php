@@ -15,6 +15,7 @@ use Modules\Zms\Enums\permissions\CountryPermissions;
 use Modules\Crm\Enums\permissions\ContactusPermissions;
 use Modules\Crm\Enums\permissions\SubscribePermissions;
 use Modules\Log\Enums\permissions\ApiLogPermissions;
+use Modules\Nabd\Enums\permissions\ClinicPermissions;
 use Modules\Notification\Enums\permissions\NotificationPermissions;
 use Modules\Notification\Enums\permissions\NotificationTemplatePermissions;
 
@@ -43,6 +44,7 @@ class ViewServiceProvider extends ServiceProvider
             $this->registerNotificationAsideMenu();
             $this->registerCrmAsideMenu();
             $this->registerLogAsideMenu();
+            $this->registerNabdsAsideMenu();
         });
     }
 
@@ -549,5 +551,48 @@ class ViewServiceProvider extends ServiceProvider
             ]);
         }
         // End Api Log Section
+    }
+
+    private function registerNabdsAsideMenu()
+    {
+        app('adminHelper')->asideMenu([
+            'id'    => 'clinic_management',
+            'type'  => 'header',
+            'title' => trans('admin::dashboard.aside_menu.clinic_management.title'),
+            'order' => 1,
+        ]);
+
+        // Start Clinic Section
+        app('adminHelper')->asideMenu([
+            'id'        => 'clinics_section',
+            'parent_id' => 'clinic_management',
+            'type'      => 'item',
+            'icon'      => 'fa-solid fa-stethoscope',
+            'title'     => trans('admin::dashboard.aside_menu.clinic_management.clinics'),
+            'order'     => 7,
+        ]);
+
+        if (app('owner') || app('admin')->can(ClinicPermissions::READ)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'view_clinics',
+                'parent_id' => 'clinics_section',
+                'type'      => 'item',
+                'link'      => route('nabd.clinics.index'),
+                'title'     => trans('admin::base.view_all'),
+                'order'     => 4,
+            ]);
+        }
+
+        if (app('owner') || app('admin')->can(ClinicPermissions::CREATE)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'create_clinics',
+                'parent_id' => 'clinics_section',
+                'type'      => 'item',
+                'link'      => route('nabd.clinics.create'),
+                'title'     => trans('admin::base.create_new'),
+                'order'     => 4,
+            ]);
+        }
+        // End Clinic Section
     }
 }

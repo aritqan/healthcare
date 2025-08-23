@@ -189,4 +189,9 @@ return [
             'action_date'               => 'Action Date',
         ],
     ],
+    'clinics'                           => [
+        'list_title'                    => 'Clinics List',
+        'columns'                       => [
+        ],
+    ],
 ];

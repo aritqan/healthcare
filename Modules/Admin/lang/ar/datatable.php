@@ -190,4 +190,9 @@ return [
             'action_date'               => 'تاريخ الحدث',
         ],
     ],
+    'clinics'                           => [
+        'list_title'                    => 'قائمة العيادات',
+        'columns'                       => [
+        ],
+    ],
 ];

@@ -21,6 +21,7 @@ return [
         'contactus_management'              => 'إدارة رسائل التواصل',
         'subscribe_management'              => 'إدارة الإشتراكات',
         'api_log_management'                => 'إدارة سجلات الAPI',
+        'clinic_management'                 => 'إدارة العيادات',
     ],
 
     'roles'                                 => [

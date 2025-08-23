@@ -273,4 +273,12 @@ return [
     'crm'                               => [
         'title'                         => 'Customer Relationship',
     ],
+    'clinics'                           => [
+        'title'                         => 'Clinics',
+        'add'                           => 'Add New Clinic',
+        'edit'                          => 'Edit Clinic',
+        'delete'                        => 'Delete Clinic',
+        'restore'                       => 'Restore Clinic',
+        'permanent_delete'              => 'Permanent Deletion Clinic',
+    ],
 ];

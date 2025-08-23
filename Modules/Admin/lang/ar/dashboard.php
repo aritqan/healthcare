@@ -91,6 +91,10 @@ return [
             'activity_logs'                 => 'سجلات النشاط',
             'activity_log_type'             => ':type | سجل النشاط | # :id',
         ],
+        'clinic_management'                 => [
+            'title'                         => 'إدارة العيادات',
+            'clinics'                       => 'العيادات',
+        ],
     ],
 
     'breadcrumbs'                           => [

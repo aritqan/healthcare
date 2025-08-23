@@ -91,6 +91,10 @@ return [
             'activity_logs'                 => 'Activity Logs',
             'activity_log_type'             => ':type | Activity Log | # :id',
         ],
+        'clinic_management'                 => [
+            'title'                         => 'Clinic Management',
+            'clinics'                       => 'Clinics',
+        ],
     ],
 
     'breadcrumbs'                           => [
