@@ -1,0 +1,340 @@
+:root {
+    --primary-admin-color: #3DD179;
+    --secondary-admin-color: #1D1A36;
+}
+
+/* Start Scroll Bar */
+body {
+    --sb-track-color: var(--secondary-admin-color);
+    --sb-thumb-color: var(--primary-admin-color);
+    --sb-size: 12px;
+}
+
+body::-webkit-scrollbar {
+    width: var(--sb-size)
+}
+
+body::-webkit-scrollbar-track {
+    background: var(--sb-track-color);
+    border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 6px;
+
+}
+
+@supports not selector(::-webkit-scrollbar) {
+    body {
+      scrollbar-color: var(--sb-thumb-color)
+                       var(--sb-track-color);
+    }
+}
+
+/* End Scroll Bar */
+
+
+#language-ar, input[name*="[ar]"], textarea[name*="[ar]"]{
+    font-family: 'Cairo', sans-serif !important;
+}
+
+#language-en, input[name*="[en]"], textarea[name*="[en]"] {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+input[name*="[ar]"], textarea[name*="[ar]"] {
+    direction: rtl;
+}
+
+input[name*="[en]"], textarea[name*="[en]"] {
+    direction: ltr;
+}
+
+.custom-search-input{
+    padding: 0.55rem;
+    font-size: .9rem;
+}
+
+.background-main-color {
+    color: #FFF;
+    background-color: var(--primary-admin-color);
+}
+
+.background-secondary-color {
+    color: #FFF;
+    background-color: var(--secondary-admin-color);
+}
+
+.text-main-color {
+    color: var(--primary-admin-color);
+}
+
+.text-secondary-color {
+    color: var(--secondary-admin-color);
+}
+
+.input-icon-password {
+    cursor: pointer;
+}
+
+button[type='submit']:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}
+
+:dir(rtl) .end-5 {
+    left: 5% !important;
+}
+:dir(ltr) .end-5 {
+    right: 5% !important;
+}
+/* Datatable */
+.datatable-btn i{
+    font-size: 1.2rem;
+}
+
+table tbody tr td {
+    font-weight: 500 !important;
+}
+
+.datatable-action-menu{
+    background-color: transparent !important;
+}
+
+.datatable-action-menu i {
+    font-size: 16px;
+}
+
+.permission-accordion .accordion-button i {
+    font-size: 1.6rem;
+    margin-right: 10px;
+}
+
+.accordion-button:not(.collapsed), .accordion-button:not(.collapsed) i {
+    color: var(--primary-admin-color);
+}
+
+html[lang="ar"] .permission-accordion .accordion-button i {
+    margin-left: 5px;
+    margin-right: 0;
+}
+.invalid-label{
+    color: #f1416c !important;
+}
+/* Button For Datatable Status And Type */
+.btn-label-warning{
+    background-color: #fff8dd;
+    color: #FFC700;
+    cursor: text !important;
+    font-weight: 600;
+}
+.btn-label-warning:hover{
+    background-color: #fff8dd;
+    color: #FFC700;
+}
+.btn-label-info{
+    background-color: #e8f0fe;
+    color: #3D7DFF;
+    cursor: text !important;
+    font-weight: 600;
+}
+.btn-label-info:hover{
+    background-color: #e8f0fe;
+    color: #3D7DFF;
+}
+.btn-label-danger{
+    background-color: #fde2e2;
+    color: #FF3D00;
+    cursor: text !important;
+    font-weight: 600;
+}
+.btn-label-danger:hover{
+    background-color: #fde2e2;
+    color: #FF3D00;
+}
+.btn-label-success{
+    background-color: #e6f4ea;
+    color: #3DD179;
+    cursor: text !important;
+    font-weight: 600;
+}
+.btn-label-success:hover{
+    background-color: #e6f4ea;
+    color: #3DD179;
+}
+.btn-label-primary{
+    background-color: #e8f0fe;
+    color: #3D7DFF;
+    cursor: text !important;
+    font-weight: 600;
+}
+.btn-label-primary:hover{
+    background-color: #e8f0fe;
+    color: #3D7DFF;
+}
+.btn-label-secondary{
+    background-color: #f8f9fa;
+    color: #6C757D;
+    cursor: text !important;
+    font-weight: 600;
+}
+.btn-label-secondary:hover{
+    background-color: #f8f9fa;
+    color: #6C757D;
+}
+
+
+/* Spinner */
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    border: 3px solid;
+    border-color: #FFF #FFF transparent transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent transparent #FF3D00 #FF3D00;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+}
+.loader::before {
+    width: 32px;
+    height: 32px;
+    border-color: #FFF #FFF transparent transparent;
+    animation: rotation 1.5s linear infinite;
+}
+.blockui .blockui-overlay{
+    z-index: 999999 !important;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes rotationBack {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+/* Bootstrap Switch */
+.bootstrap-switch-primary-color{
+    background-color: var(--primary-admin-color);
+    border-color: var(--primary-admin-color);
+    color: #FFF
+}
+
+.bootstrap-switch-container span{
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+:dir(rtl) body{
+    letter-spacing: 1px;
+}
+
+:dir(rtl) table tbody tr td {
+    font-weight: 600 !important;
+    font-size: 13px !important;
+}
+
+:dir(rtl) .bootstrap-switch-container span{
+    font-weight: 500;
+    font-size: 12px !important;
+}
+
+/* Dropzone */
+.custom-remove-btn {
+    background: none;
+    border: none;
+    color: #d9534f;
+    font-size: 14px;
+    margin-left: 10px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.custom-remove-btn:hover {
+    color: #c9302c;
+}
+
+#kt_docs_toast_stack_container{
+    z-index: 999999 !important;
+}
+
+.select2-selection__rendered{
+    direction: ltr !important;
+}
+
+.notification-item > div{
+    width: 70%;
+}
+
+.notification-item:hover{
+    background: #f5f5f5;
+}
+
+.notification-dropdown {
+    width: 500px !important;
+}
+
+@media screen and (max-width: 500px) {
+    .notification-dropdown {
+        width: 350px !important;
+    }
+}
+
+.view-modal-body{
+    transform-origin: top;
+    transition: transform 1s ease;
+}
+
+/* Spinner styles */
+.modal-spinner {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050;
+}
+
+/* Blur effect */
+.view-modal-body.loading {
+    filter: blur(5px);
+    pointer-events: none;
+    position: relative;
+}
+
+.text-break-all {
+    word-break: break-all;
+}
+
+.iti {
+    width: 100%;
+}

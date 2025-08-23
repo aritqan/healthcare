@@ -1,0 +1,13 @@
+{
+    "name": "Zms",
+    "alias": "zms",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Zms\\Providers\\ZmsServiceProvider"
+    ],
+    "files": [
+        "app//Helpers//Helper.php"
+    ]
+}

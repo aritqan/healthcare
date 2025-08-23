@@ -1,0 +1,13 @@
+{
+    "name": "Config",
+    "alias": "config",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Config\\Providers\\ConfigServiceProvider"
+    ],
+    "files": [
+        "app//Helpers//Helper.php"
+    ]
+}

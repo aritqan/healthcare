@@ -1,0 +1,12 @@
+{
+    "Admin": true,
+    "Permission": true,
+    "Base": true,
+    "Config": true,
+    "Cms": true,
+    "Auth": true,
+    "Notification": true,
+    "Crm": true,
+    "Log": true,
+    "Zms": true
+}
