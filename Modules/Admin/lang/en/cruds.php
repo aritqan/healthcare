@@ -281,4 +281,12 @@ return [
         'restore'                       => 'Restore Clinic',
         'permanent_delete'              => 'Permanent Deletion Clinic',
     ],
+    'pharmacies'                        => [
+        'title'                         => 'Pharmacies',
+        'add'                           => 'Add New Pharmacy',
+        'edit'                          => 'Edit Pharmacy',
+        'delete'                        => 'Delete Pharmacy',
+        'restore'                       => 'Restore Pharmacy',
+        'permanent_delete'              => 'Permanent Deletion Pharmacy',
+    ],
 ];

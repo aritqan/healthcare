@@ -22,6 +22,7 @@ return [
         'subscribe_management'              => 'Subscribe Management',
         'api_log_management'                => 'API Log Management',
         'clinic_management'                 => 'Clinic Management',
+        'pharmacy_management'               => 'Pharmacy Management',
     ],
 
     'roles'                                 => [

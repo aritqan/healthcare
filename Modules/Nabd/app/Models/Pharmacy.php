@@ -11,16 +11,16 @@ use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Modules\Nabd\Enums\permissions\ClinicPermissions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Nabd\Enums\permissions\PharmacyPermissions;
 
-class Clinic extends BaseModel
+class Pharmacy extends BaseModel
 {
     use Translatable, SoftDeletes, Disableable, HasFactory;
 
     // Start Properties
 
-    const VIEW_PATH = 'clinics';
+    const VIEW_PATH = 'pharmacies';
 
     protected $fillable = [
         'state_id',
@@ -46,7 +46,7 @@ class Clinic extends BaseModel
      */
     protected static function newFactory()
     {
-        return \Modules\Nabd\Database\Factories\ClinicFactory::new();
+        return \Modules\Nabd\Database\Factories\PharmacyFactory::new();
     }
 
     // End Properties
@@ -83,7 +83,7 @@ class Clinic extends BaseModel
         ];
     }
 
-    public function getModel(int $id, bool $withTrashed = false, bool $withDisabled = false) : Clinic
+    public function getModel(int $id, bool $withTrashed = false, bool $withDisabled = false) : Pharmacy
     {
         $model = $this::query();
 
@@ -102,7 +102,7 @@ class Clinic extends BaseModel
     {
         $model = $this::query()->withDisabled();
 
-        if($this->shouldShowTrash($data, ClinicPermissions::VIEW_TRASH)) {
+        if($this->shouldShowTrash($data, PharmacyPermissions::VIEW_TRASH)) {
             $model = $model->onlyTrashed();
         }
 
@@ -123,8 +123,8 @@ class Clinic extends BaseModel
 
                 return
                     app('customDataTable')
-                    ->routePrefix('nabd.clinics')
-                    ->of($model, ClinicPermissions::PERMISSION_NAMESPACE)
+                    ->routePrefix('nabd.pharmacies')
+                    ->of($model, PharmacyPermissions::PERMISSION_NAMESPACE)
                     ->excludeActions($excludeActions)
                     ->getDatatableActions();
             })

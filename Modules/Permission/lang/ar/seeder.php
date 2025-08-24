@@ -22,6 +22,7 @@ return [
         'subscribe_management'              => 'إدارة الإشتراكات',
         'api_log_management'                => 'إدارة سجلات الAPI',
         'clinic_management'                 => 'إدارة العيادات',
+        'pharmacy_management'               => 'إدارة الصيدليات',
     ],
 
     'roles'                                 => [

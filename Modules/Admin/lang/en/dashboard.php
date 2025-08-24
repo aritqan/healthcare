@@ -95,6 +95,10 @@ return [
             'title'                         => 'Clinic Management',
             'clinics'                       => 'Clinics',
         ],
+        'pharmacy_management'               => [
+            'title'                         => 'Pharmacy Management',
+            'pharmacies'                    => 'Pharmacies',
+        ],
     ],
 
     'breadcrumbs'                           => [

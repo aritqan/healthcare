@@ -95,6 +95,10 @@ return [
             'title'                         => 'إدارة العيادات',
             'clinics'                       => 'العيادات',
         ],
+        'pharmacy_management'               => [
+            'title'                         => 'إدارة الصيدليات',
+            'pharmacies'                    => 'الصيدليات',
+        ],
     ],
 
     'breadcrumbs'                           => [

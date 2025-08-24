@@ -193,6 +193,13 @@ return [
     'clinics'                           => [
         'list_title'                    => 'قائمة العيادات',
         'columns'                       => [
+            'city'                      => 'المدينة',
+        ],
+    ],
+    'pharmacies'                        => [
+        'list_title'                    => 'قائمة الصيدليات',
+        'columns'                       => [
+            'city'                      => 'المدينة',
         ],
     ],
 ];

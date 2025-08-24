@@ -1,13 +1,13 @@
 @extends('admin::layouts.master', [
-    'title' => trans('admin::dashboard.aside_menu.clinic_management.clinics'),
+    'title' => trans('admin::dashboard.aside_menu.pharmacy_management.pharmacies'),
 ])
 
 @section('toolbar')
     @component('admin::includes.toolbar', [
             'options'               => [
-                'title'             => trans('admin::dashboard.aside_menu.clinic_management.clinics'),
+                'title'             => trans('admin::dashboard.aside_menu.pharmacy_management.pharmacies'),
                 'actions'           => [
-                    'filter'        => false,
+                    'filter'        => true,
                     'search'        => true,
                 ],
             ]
@@ -34,7 +34,7 @@
                     @include('admin::components.datatables.header.title', [
                         'options'   => [
                             'role'  => $viewTrashPermission,
-                            'title' => trans('admin::datatable.clinics.list_title'),
+                            'title' => trans('admin::datatable.pharmacies.list_title'),
                         ]
                     ])
                 </div>
@@ -46,7 +46,7 @@
                         'options'               => [
                             'role'              => $createPermission,
                             'multiActions'      => $bulkActionDropdown,
-                            'route'             => route('nabd.clinics.create'),
+                            'route'             => route('nabd.pharmacies.create'),
                         ]
                     ])
                 </div>
@@ -58,7 +58,7 @@
             <div class="card-body  py-4">
                 @component('admin::components.datatables.table', [
                         'options'           => [
-                            'url'           => route('nabd.clinics.datatable'),
+                            'url'           => route('nabd.pharmacies.datatable'),
                             'withCheckbox'  => true,
                             'filter'        => true,
                         ]

@@ -192,6 +192,13 @@ return [
     'clinics'                           => [
         'list_title'                    => 'Clinics List',
         'columns'                       => [
+            'city'                      => 'City',
+        ],
+    ],
+    'pharmacies'                        => [
+        'list_title'                    => 'Pharmacies List',
+        'columns'                       => [
+            'city'                      => 'City',
         ],
     ],
 ];

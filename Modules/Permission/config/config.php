@@ -7,6 +7,10 @@ use Modules\Permission\Enums\permissions\AbilityPermissions;
 
 return [
     'models' => [
+        'pharmacy'                                  => [
+            'name'                                  => 'pharmacy',
+            'icon'                                  => 'fa-solid fa-prescription-bottle',
+        ],
         'clinic'                                    => [
             'name'                                  => 'clinic',
             'icon'                                  => 'fa-solid fa-stethoscope',

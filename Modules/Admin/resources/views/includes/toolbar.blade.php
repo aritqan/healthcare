@@ -41,7 +41,7 @@
 
             <!--begin::Actions-->
             <div class="d-flex align-items-center gap-2 gap-lg-3">
-                @if (isset($VALUE['actions']['filter']) && $VALUE['actions']['filter'])
+                {{-- @if (isset($VALUE['actions']['filter']) && $VALUE['actions']['filter'])
                     <div class="m-0">
                         @component('admin::components.other.hyperlink', [
                                 'options'                       => [
@@ -70,7 +70,7 @@
                             @endisset
                         @endcomponent
                     </div>
-                @endif
+                @endif --}}
 
                 @if (isset($VALUE['actions']['search']) && $VALUE['actions']['search'])
                     <div class="d-flex align-items-center position-relative m-0">

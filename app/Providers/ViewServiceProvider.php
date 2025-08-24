@@ -16,6 +16,7 @@ use Modules\Crm\Enums\permissions\ContactusPermissions;
 use Modules\Crm\Enums\permissions\SubscribePermissions;
 use Modules\Log\Enums\permissions\ApiLogPermissions;
 use Modules\Nabd\Enums\permissions\ClinicPermissions;
+use Modules\Nabd\Enums\permissions\PharmacyPermissions;
 use Modules\Notification\Enums\permissions\NotificationPermissions;
 use Modules\Notification\Enums\permissions\NotificationTemplatePermissions;
 
@@ -555,6 +556,7 @@ class ViewServiceProvider extends ServiceProvider
 
     private function registerNabdsAsideMenu()
     {
+        // Start Clinic Section
         app('adminHelper')->asideMenu([
             'id'    => 'clinic_management',
             'type'  => 'header',
@@ -562,7 +564,6 @@ class ViewServiceProvider extends ServiceProvider
             'order' => 1,
         ]);
 
-        // Start Clinic Section
         app('adminHelper')->asideMenu([
             'id'        => 'clinics_section',
             'parent_id' => 'clinic_management',
@@ -589,6 +590,46 @@ class ViewServiceProvider extends ServiceProvider
                 'parent_id' => 'clinics_section',
                 'type'      => 'item',
                 'link'      => route('nabd.clinics.create'),
+                'title'     => trans('admin::base.create_new'),
+                'order'     => 4,
+            ]);
+        }
+        // End Clinic Section
+
+        // Start Pharmacy Section
+        app('adminHelper')->asideMenu([
+            'id'    => 'pharmacy_management',
+            'type'  => 'header',
+            'title' => trans('admin::dashboard.aside_menu.pharmacy_management.title'),
+            'order' => 1,
+        ]);
+
+        app('adminHelper')->asideMenu([
+            'id'        => 'pharmacies_section',
+            'parent_id' => 'pharmacy_management',
+            'type'      => 'item',
+            'icon'      => 'fa-solid fa-prescription-bottle',
+            'title'     => trans('admin::dashboard.aside_menu.pharmacy_management.pharmacies'),
+            'order'     => 7,
+        ]);
+
+        if (app('owner') || app('admin')->can(PharmacyPermissions::READ)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'view_pharmacies',
+                'parent_id' => 'pharmacies_section',
+                'type'      => 'item',
+                'link'      => route('nabd.pharmacies.index'),
+                'title'     => trans('admin::base.view_all'),
+                'order'     => 4,
+            ]);
+        }
+
+        if (app('owner') || app('admin')->can(PharmacyPermissions::CREATE)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'create_pharmacies',
+                'parent_id' => 'pharmacies_section',
+                'type'      => 'item',
+                'link'      => route('nabd.pharmacies.create'),
                 'title'     => trans('admin::base.create_new'),
                 'order'     => 4,
             ]);
