@@ -12,7 +12,9 @@ class ClinicService extends BaseCrudService
      * The unnecessary fields for crud.
      * Example: if the data has translation fields, you can add them here. As a ('title', 'description')
      */
-    protected $unnecessaryFieldsForCrud = [];
+    protected $unnecessaryFieldsForCrud = [
+        'name'
+    ];
 
     /**
      * Create a new Model instance.
@@ -24,12 +26,12 @@ class ClinicService extends BaseCrudService
     {
         $modelData = $this->prepareModelData($data);
 
-        // $translations = $this->createTranslations($data, 'title', ['description']);
+        $translations = $this->createTranslations($data, 'name');
 
         $model = DB::transaction(function () use($modelData, $translations){
             $model = CrudModel::create($modelData);
 
-            // $model->update($translations);
+            $model->update($translations);
 
             return $model;
         });
@@ -50,7 +52,7 @@ class ClinicService extends BaseCrudService
 
         DB::transaction(function () use($data, $model, $modelData){
             $model->update($modelData);
-            // $this->updateTranslations($model, $data, 'title', ['description']);
+            $this->updateTranslations($model, $data, 'name');
         });
 
         return $model;

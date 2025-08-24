@@ -77,3 +77,28 @@ if(! function_exists('getCountryPhoneCode')) {
         return $phoneCode;
     }
 }
+
+if(!function_exists('getStatesForCountry')) {
+    /**
+     * Get the states for the country.
+     */
+    function getStatesForCountry($iso3 = 'SAU')
+    {
+        $iso3 = strtoupper($iso3);
+
+        $states = Cache::get($iso3 . '_states');
+
+        if(! Schema::hasTable('countries')) {
+            return [];
+        }
+
+        if(!$states) {
+            $country    = getCountryInfo($iso3);
+            $states     = $country->states;
+
+            Cache::forever($iso3 . '_states', $states);
+        }
+
+        return $states;
+    }
+}

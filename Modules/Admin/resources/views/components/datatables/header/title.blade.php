@@ -15,8 +15,8 @@
             </span>
         @endif
 
-        @if ($VALUE['withSwitchArchive'] &&  (app('owner') || $VALUE['role']))
+        {{-- @if ($VALUE['withSwitchArchive'] &&  (app('owner') || $VALUE['role']))
             <input type="checkbox" id="switch-archive">
-        @endif
+        @endif --}}
     </div>
 @endisset

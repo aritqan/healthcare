@@ -3,7 +3,6 @@
 namespace Modules\Nabd\Http\Controllers\Admin;
 
 use Modules\Base\Http\Controllers\BaseCrudController;
-use Illuminate\Http\Request;
 use Modules\Nabd\Models\Clinic;
 use Modules\Nabd\Http\Services\ClinicService;
 use Modules\Nabd\Enums\permissions\ClinicPermissions;

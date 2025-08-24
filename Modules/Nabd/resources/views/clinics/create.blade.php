@@ -38,16 +38,37 @@
                             ])
                             @slot('fields')
                                 <div class="row">
-                                    <div class="col-lg-6 col-12 mb-10 form-group">
-
-                                    </div>
-
-                                    <div class="col-lg-6 col-12 mb-10 form-group">
-
+                                    <div class="col-12">
+                                        @include('admin::components.other.lang_crud', [
+                                            'options'           => [
+                                                'name'          => [
+                                                    'show'      => true,
+                                                    'required'  => true,
+                                                    'value'     => null,
+                                                ],
+                                            ]
+                                        ])
                                     </div>
                                 </div>
 
                                 <div class="separator separator-dashed my-5"></div>
+
+                                <div class="row">
+                                    <div class="col-lg-6 col-12 mb-10 form-group">
+                                        @include('admin::components.inputs.select', [
+                                            'options'           => [
+                                                'name'          => 'state_id',
+                                                'label'         => trans('admin::inputs.clinic_crud.state_id.label'),
+                                                'placeholder'   => trans('admin::inputs.clinic_crud.state_id.placeholder'),
+                                                'help'          => trans('admin::inputs.clinic_crud.state_id.help'),
+                                                'required'      => true,
+                                                'data'          => getStatesForCountry('SYR'),
+                                                'text'          => fn($key, $value) => $value->smartTrans('name'),
+                                                'values'        => fn($key, $value) => $value->id,
+                                            ]
+                                        ])
+                                    </div>
+                                </div>
                             @endslot
                         @endcomponent
                     </div>

@@ -5,7 +5,7 @@
             'class'             => 'table border table-rounded table-hover table-row-bordered table-bordered gy-3 gs-5',
             'url'               => route('base.empty_data'),
             'method'            => GET_METHOD,
-            'withExportButton'  => true,
+            'withExportButton'  => false,
             'withID'            => true,
             'withAction'        => true,
             'withCheckbox'      => false,
@@ -27,13 +27,13 @@
         <thead class="bg-secondary">
             <tr class="fw-bold fs-6">
 
-                @if($VALUE['withCheckbox'])
+                {{-- @if($VALUE['withCheckbox'])
                     <th style="width: 25px" class="not-export">
                         <label class="form-check form-check-custom form-check-solid form-check-sm">
                             <input class="form-check-input check-all-datatable-items" type="checkbox" value="all"/>
                         </label>
                     </th>
-                @endif
+                @endif --}}
 
                 <th @class(['d-none' => ! $VALUE['withID'], 'w-50px'])> # </th>
 
@@ -175,6 +175,7 @@
                             }
                         },
                         columns: [
+                            /*
                             @if ($VALUE['withCheckbox'])
                                 {
                                     data        : 'id',
@@ -187,6 +188,7 @@
                                     }
                                 },
                             @endif
+                            */
                             {
                                 data        : 'id',
                                 name        : 'id',

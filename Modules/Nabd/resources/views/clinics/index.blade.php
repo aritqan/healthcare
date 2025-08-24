@@ -7,7 +7,7 @@
             'options'               => [
                 'title'             => trans('admin::dashboard.aside_menu.clinic_management.clinics'),
                 'actions'           => [
-                    'filter'        => true,
+                    'filter'        => false,
                     'search'        => true,
                 ],
             ]
@@ -65,12 +65,17 @@
                     ])
                     @slot('columns')
                         {{-- Datatable Columns --}}
-                        <th> @lang('admin::datatable.base_columns.title') </th>
+                        <th> @lang('admin::datatable.base_columns.name') </th>
                     @endslot
 
                     <script>
                         @slot('jsColumns')
-
+                            {
+                                data: 'name',
+                                name: 'name',
+                                orderable: false,
+                                searchable: false,
+                            },
                         @endslot
                     </script>
 

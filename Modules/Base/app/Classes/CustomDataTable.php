@@ -288,9 +288,9 @@ class CustomDataTable
 
         $this->addView();
         $this->addUpdate();
-        $this->addShowLog();
-        $this->addDisable();
-        $this->addEnable();
+        // $this->addShowLog();
+        // $this->addDisable();
+        // $this->addEnable();
         $this->addSoftDelete();
         $this->addRestore();
         $this->addHardDelete();

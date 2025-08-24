@@ -2,14 +2,16 @@
 
 namespace Modules\Nabd\Models;
 
+use Modules\Zms\Models\State;
 use Illuminate\Http\JsonResponse;
+use Modules\Base\Models\BaseModel;
+use Modules\Base\Trait\Disableable;
 use Yajra\DataTables\Facades\DataTables;
 use Astrotomic\Translatable\Translatable;
-use Modules\Base\Models\BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\Base\Trait\Disableable;
 use Modules\Nabd\Enums\permissions\ClinicPermissions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Clinic extends BaseModel
 {
@@ -46,7 +48,10 @@ class Clinic extends BaseModel
     // End Properties
 
     // Start Relationships
-
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
+    }
     // End Relationships
 
     // Start Scopes

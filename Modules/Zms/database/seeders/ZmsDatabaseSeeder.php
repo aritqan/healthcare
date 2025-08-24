@@ -57,5 +57,8 @@ class ZmsDatabaseSeeder extends Seeder
         foreach(collect($cityTranslations)->chunk(100) as $chunkedCityTranslations) {
             CityTranslation::insert($chunkedCityTranslations->toArray());
         }
+
+        // updated disabeld_at to all country to now excepty the country has SYR iso3 to show only active one country
+        Country::where('iso3', '!=', 'SYR')->update(['deleted_at' => now()]);
     }
 }

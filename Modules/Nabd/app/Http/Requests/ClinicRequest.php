@@ -2,9 +2,9 @@
 
 namespace Modules\Nabd\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Modules\Base\Http\Requests\BaseRequest;
 
-class ClinicRequest extends FormRequest
+class ClinicRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +12,8 @@ class ClinicRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'state_id'  => ['required', 'integer', 'exists:states,id'],
+            'name'      => ['required', 'array'],
         ];
     }
 
@@ -22,5 +23,14 @@ class ClinicRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    public function after(): array
+    {
+        return [
+            function ($validator) {
+                $this->validateBaseInput(validator:$validator, data:$this->name , inputName:'name', atLeastOneLocaleWithSize:true);
+            }
+        ];
     }
 }

@@ -483,4 +483,27 @@ return [
             'help'                  => 'Enter a Status Code (required)',
         ],
     ],
+
+    'clinic_crud'                   => [
+        'name'                      => [
+            'label'                 => 'Name',
+            'placeholder'           => 'Please enter a Name',
+            'help'                  => 'Enter a Name (required)',
+        ],
+        'address'                   => [
+            'label'                 => 'Address',
+            'placeholder'           => 'Please enter an Address',
+            'help'                  => 'Enter an Address (required)',
+        ],
+        'phone'                     => [
+            'label'                 => 'Phone',
+            'placeholder'           => 'Please enter a Phone',
+            'help'                  => 'Enter a Phone (required)',
+        ],
+        'state_id'                  => [
+            'label'                 => 'City',
+            'placeholder'           => 'Please select a City',
+            'help'                  => 'Select a City (required)',
+        ],
+    ],
 ];
