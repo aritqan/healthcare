@@ -202,7 +202,7 @@ return [
             'city'                      => 'المدينة',
         ],
     ],
-    'doktors'                           => [
+    'doctors'                           => [
         'list_title'                    => 'قائمة الأطباء',
         'columns'                       => [
         ],

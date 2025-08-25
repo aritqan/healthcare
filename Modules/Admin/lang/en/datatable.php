@@ -201,8 +201,8 @@ return [
             'city'                      => 'City',
         ],
     ],
-    'doktors'                           => [
-        'list_title'                    => 'Doktors List',
+    'doctors'                           => [
+        'list_title'                    => 'Doctors List',
         'columns'                       => [
         ],
     ],

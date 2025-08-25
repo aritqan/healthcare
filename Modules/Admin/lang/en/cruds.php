@@ -289,7 +289,7 @@ return [
         'restore'                       => 'Restore Pharmacy',
         'permanent_delete'              => 'Permanent Deletion Pharmacy',
     ],
-    'doktors'                           => [
+    'doctors'                           => [
         'title'                         => 'Doctors',
         'add'                           => 'Add New Doctor',
         'edit'                          => 'Edit Doctor',

@@ -16,7 +16,7 @@ use Modules\Crm\Enums\permissions\ContactusPermissions;
 use Modules\Crm\Enums\permissions\SubscribePermissions;
 use Modules\Log\Enums\permissions\ApiLogPermissions;
 use Modules\Nabd\Enums\permissions\ClinicPermissions;
-use Modules\Nabd\Enums\permissions\DoktorPermissions;
+use Modules\Nabd\Enums\permissions\DoctorPermissions;
 use Modules\Nabd\Enums\permissions\MedicalSpecialtyPermissions;
 use Modules\Nabd\Enums\permissions\PharmacyPermissions;
 use Modules\Notification\Enums\permissions\NotificationPermissions;
@@ -631,7 +631,7 @@ class ViewServiceProvider extends ServiceProvider
         }
         // End Clinic Section
 
-        // Start Doktor Section
+        // Start Doctor Section
         app('adminHelper')->asideMenu([
             'id'        => 'doktros_section',
             'parent_id' => 'clinic_management',
@@ -641,28 +641,28 @@ class ViewServiceProvider extends ServiceProvider
             'order'     => 7,
         ]);
 
-        if (app('owner') || app('admin')->can(DoktorPermissions::READ)) {
+        if (app('owner') || app('admin')->can(DoctorPermissions::READ)) {
             app('adminHelper')->asideMenu([
-                'id'        => 'view_doktors',
+                'id'        => 'view_doctors',
                 'parent_id' => 'doktros_section',
                 'type'      => 'item',
-                'link'      => route('nabd.doktors.index'),
+                'link'      => route('nabd.doctors.index'),
                 'title'     => trans('admin::base.view_all'),
                 'order'     => 4,
             ]);
         }
 
-        if (app('owner') || app('admin')->can(DoktorPermissions::CREATE)) {
+        if (app('owner') || app('admin')->can(DoctorPermissions::CREATE)) {
             app('adminHelper')->asideMenu([
-                'id'        => 'create_doktors',
-                'parent_id' => 'doktors_section',
+                'id'        => 'create_doctors',
+                'parent_id' => 'doctors_section',
                 'type'      => 'item',
-                'link'      => route('nabd.doktors.create'),
+                'link'      => route('nabd.doctors.create'),
                 'title'     => trans('admin::base.create_new'),
                 'order'     => 4,
             ]);
         }
-        // End Doktor Section
+        // End Doctor Section
 
         // Start Pharmacy Section
         app('adminHelper')->asideMenu([
