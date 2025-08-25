@@ -201,4 +201,9 @@ return [
             'city'                      => 'City',
         ],
     ],
+    'doktors'                           => [
+        'list_title'                    => 'Doktors List',
+        'columns'                       => [
+        ],
+    ],
 ];

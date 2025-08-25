@@ -92,12 +92,16 @@ return [
             'activity_log_type'             => ':type | Activity Log | # :id',
         ],
         'clinic_management'                 => [
-            'title'                         => 'Clinic Management',
+            'title'                         => 'Clinic & Doctor Management',
             'clinics'                       => 'Clinics',
         ],
         'pharmacy_management'               => [
             'title'                         => 'Pharmacy Management',
             'pharmacies'                    => 'Pharmacies',
+        ],
+        'doctor_management'                 => [
+            'title'                         => 'Doctor Management',
+            'doctors'                       => 'Doctors',
         ],
     ],
 

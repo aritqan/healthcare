@@ -289,4 +289,12 @@ return [
         'restore'                       => 'Restore Pharmacy',
         'permanent_delete'              => 'Permanent Deletion Pharmacy',
     ],
+    'doktors'                           => [
+        'title'                         => 'Doctors',
+        'add'                           => 'Add New Doctor',
+        'edit'                          => 'Edit Doctor',
+        'delete'                        => 'Delete Doctor',
+        'restore'                       => 'Restore Doctor',
+        'permanent_delete'              => 'Permanent Deletion Doctor',
+    ],
 ];

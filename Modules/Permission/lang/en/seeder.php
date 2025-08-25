@@ -23,6 +23,7 @@ return [
         'api_log_management'                => 'API Log Management',
         'clinic_management'                 => 'Clinic Management',
         'pharmacy_management'               => 'Pharmacy Management',
+        'doctor_management'                 => 'Doctor Management',
     ],
 
     'roles'                                 => [

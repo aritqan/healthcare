@@ -92,12 +92,16 @@ return [
             'activity_log_type'             => ':type | سجل النشاط | # :id',
         ],
         'clinic_management'                 => [
-            'title'                         => 'إدارة العيادات',
+            'title'                         => 'إدارة العيادات و الأطباء',
             'clinics'                       => 'العيادات',
         ],
         'pharmacy_management'               => [
             'title'                         => 'إدارة الصيدليات',
             'pharmacies'                    => 'الصيدليات',
+        ],
+        'doctor_management'                 => [
+            'title'                         => 'إدارة الأطباء',
+            'doctors'                       => 'الأطباء',
         ],
     ],
 

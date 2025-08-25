@@ -23,6 +23,7 @@ return [
         'api_log_management'                => 'إدارة سجلات الAPI',
         'clinic_management'                 => 'إدارة العيادات',
         'pharmacy_management'               => 'إدارة الصيدليات',
+        'doctor_management'                 => 'إدارة الأطباء',
     ],
 
     'roles'                                 => [
