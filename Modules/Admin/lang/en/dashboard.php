@@ -103,6 +103,10 @@ return [
             'title'                         => 'Doctor Management',
             'doctors'                       => 'Doctors',
         ],
+        'medical_specialty_management'      => [
+            'title'                         => 'Medical Specialty Management',
+            'medical_specialties'           => 'Medical Specialties',
+        ],
     ],
 
     'breadcrumbs'                           => [

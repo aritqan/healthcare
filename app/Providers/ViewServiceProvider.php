@@ -17,6 +17,7 @@ use Modules\Crm\Enums\permissions\SubscribePermissions;
 use Modules\Log\Enums\permissions\ApiLogPermissions;
 use Modules\Nabd\Enums\permissions\ClinicPermissions;
 use Modules\Nabd\Enums\permissions\DoktorPermissions;
+use Modules\Nabd\Enums\permissions\MedicalSpecialtyPermissions;
 use Modules\Nabd\Enums\permissions\PharmacyPermissions;
 use Modules\Notification\Enums\permissions\NotificationPermissions;
 use Modules\Notification\Enums\permissions\NotificationTemplatePermissions;
@@ -563,6 +564,39 @@ class ViewServiceProvider extends ServiceProvider
             'title' => trans('admin::dashboard.aside_menu.clinic_management.title'),
             'order' => 1,
         ]);
+
+        // Start Medical Specialty Section
+        app('adminHelper')->asideMenu([
+            'id'        => 'medical_specialties_section',
+            'parent_id' => 'clinic_management',
+            'type'      => 'item',
+            'icon'      => 'fa-solid fa-kit-medical',
+            'title'     => trans('admin::dashboard.aside_menu.medical_specialty_management.medical_specialties'),
+            'order'     => 7,
+        ]);
+
+        if (app('owner') || app('admin')->can(MedicalSpecialtyPermissions::READ)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'view_medical_specialties',
+                'parent_id' => 'medical_specialties_section',
+                'type'      => 'item',
+                'link'      => route('nabd.medical_specialties.index'),
+                'title'     => trans('admin::base.view_all'),
+                'order'     => 4,
+            ]);
+        }
+
+        if (app('owner') || app('admin')->can(MedicalSpecialtyPermissions::CREATE)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'create_medical_specialties',
+                'parent_id' => 'medical_specialties_section',
+                'type'      => 'item',
+                'link'      => route('nabd.medical_specialties.create'),
+                'title'     => trans('admin::base.create_new'),
+                'order'     => 4,
+            ]);
+        }
+        // End Medical Specialty Section
 
         // Start Clinic Section
         app('adminHelper')->asideMenu([

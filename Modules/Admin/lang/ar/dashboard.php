@@ -103,6 +103,10 @@ return [
             'title'                         => 'إدارة الأطباء',
             'doctors'                       => 'الأطباء',
         ],
+        'medical_specialty_management'      => [
+            'title'                         => 'إدارة التخصصات الطبية',
+            'medical_specialties'           => 'التخصصات الطبية',
+        ],
     ],
 
     'breadcrumbs'                           => [

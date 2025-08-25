@@ -20,6 +20,7 @@ return [
         'notification_management'           => 'إدارة الإشعارات',
         'contactus_management'              => 'إدارة رسائل التواصل',
         'subscribe_management'              => 'إدارة الإشتراكات',
+        'medical_specialty_management'      => 'إدارة التخصصات الطبية',
         'api_log_management'                => 'إدارة سجلات الAPI',
         'clinic_management'                 => 'إدارة العيادات',
         'pharmacy_management'               => 'إدارة الصيدليات',

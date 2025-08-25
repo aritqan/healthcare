@@ -206,4 +206,9 @@ return [
         'columns'                       => [
         ],
     ],
+    'medical_specialties'               => [
+        'list_title'                    => 'Medical Specialties List',
+        'columns'                       => [
+        ],
+    ],
 ];
