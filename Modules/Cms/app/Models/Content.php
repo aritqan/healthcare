@@ -4,8 +4,9 @@ namespace Modules\Cms\Models;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 use Modules\Admin\Models\Admin;
+use Illuminate\Http\JsonResponse;
 use Modules\Base\Models\BaseModel;
 use Modules\Base\Trait\Disableable;
 use Modules\Cms\Traits\ContentTrait;
@@ -15,8 +16,8 @@ use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Cms\Enums\permissions\ContentPermissions;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Content extends BaseModel implements Auditable
 {
@@ -183,7 +184,7 @@ class Content extends BaseModel implements Auditable
     public function getDataTable(array $data, $permissionClass) : JsonResponse
     {
         $model              = $this::query()->byType($data['type'])->withDisabled();
-        $permissionClass    = 'Modules\\Cms\\Enums\\permissions\\' . $data['type'] . 'Permissions';
+        $permissionClass    = 'Modules\\Cms\\Enums\\permissions\\' . Str::studly($data['type']) . 'Permissions';
 
         if($this->shouldShowTrash($data, $permissionClass::VIEW_TRASH)) {
             $model = $model->onlyTrashed();

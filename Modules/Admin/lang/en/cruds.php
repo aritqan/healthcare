@@ -297,7 +297,7 @@ return [
         'restore'                       => 'Restore Doctor',
         'permanent_delete'              => 'Permanent Deletion Doctor',
     ],
-    'medical_specialties'               => [
+    'medical-specialties'               => [
         'title'                         => 'Medical Specialists',
         'add'                           => 'Add New Medical Specialist',
         'edit'                          => 'Edit Medical Specialist',

@@ -21,10 +21,10 @@ return [
         'contactus_management'              => 'Contact Us Management',
         'subscribe_management'              => 'Subscribe Management',
         'api_log_management'                => 'API Log Management',
-        'medical_specialty_management'      => 'Medical Specialty Management',
         'clinic_management'                 => 'Clinic Management',
         'pharmacy_management'               => 'Pharmacy Management',
         'doctor_management'                 => 'Doctor Management',
+        'medical-specialties_management'    => 'Medical Specialties Management',
     ],
 
     'roles'                                 => [

@@ -14,6 +14,7 @@ return [
         'materials'             => 'Materials|Material',
         'proportions'           => 'Proportions|Proportion',
         'gender'                => 'Gender|Gender',
+        'medical-specialties'   => 'Medical Specialties|Medical Specialty',
     ],
 
     'sliders'                   => [
@@ -26,5 +27,9 @@ return [
         'privacy_policy'        => 'Privacy Policy',
         'terms_and_conditions'  => 'Terms and Conditions',
         'about_us'              => 'About Us',
+    ],
+
+    'medical_specialties'       => [
+        'title'                 => 'Medical Specialties',
     ],
 ];

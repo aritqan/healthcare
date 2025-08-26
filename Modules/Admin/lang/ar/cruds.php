@@ -305,7 +305,7 @@ return [
         'restore'               => 'إستعادة بيانات الطبيب',
         'permanent_delete'      => 'حذف نهائي لبيانات الطبيب',
     ],
-    'medical_specialties'       => [
+    'medical-specialties'       => [
         'title'                 => 'التخصصات الطبية',
         'add'                   => 'إضافة تخصص طبي جديد',
         'edit'                  => 'تعديل تخصص الطبي',

@@ -24,7 +24,7 @@ class ContentFactory extends Factory
         // get random elemnt from $typeList form keys
         $type    = $this->faker->randomElement(array_keys(self::$typeList));
 
-        if($type == BaseContentTypes::PAGES) return [];
+        if($type == BaseContentTypes::PAGES || $type == BaseContentTypes::MEDICAL_SPECIALTIES) return [];
 
         return [
             'type'              => $type,

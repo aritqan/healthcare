@@ -107,6 +107,9 @@ return [
             'title'                         => 'Medical Specialty Management',
             'medical_specialties'           => 'Medical Specialties',
         ],
+        'medical_management'                => [
+            'title'                         => 'Medical Management',
+        ],
     ],
 
     'breadcrumbs'                           => [

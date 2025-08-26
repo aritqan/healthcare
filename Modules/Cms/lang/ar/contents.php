@@ -13,6 +13,7 @@ return [
         'materials'             => 'مادة|المواد',
         'proportions'           => 'نسبة|التناسبات',
         'gender'                => 'جنس|الأجناس',
+        'medical-specialties'   => 'تخصص طبي|التخصصات الطبية',
     ],
 
     'sliders'                   => [
@@ -25,5 +26,9 @@ return [
         'privacy_policy'        => 'سياسة الخصوصية',
         'terms_and_conditions'  => 'الشروط والأحكام',
         'about_us'              => 'من نحن',
+    ],
+
+    'medical_specialties'       => [
+        'title'                 => 'التخصصات الطبية',
     ],
 ];

@@ -6,8 +6,10 @@ use Modules\Cms\Models\Content;
 use Illuminate\Support\ServiceProvider;
 use Modules\Auth\Enums\permissions\UserPermissions;
 use Modules\Admin\Enums\permissions\AdminPermissions;
+use Modules\Cms\Enums\contents\BaseContentTypes;
 use Modules\Cms\Enums\permissions\ContentCategoryPermissions;
 use Modules\Cms\Enums\permissions\ContentTagPermissions;
+use Modules\Cms\Enums\permissions\MedicalSpecialtiesPermissions;
 use Modules\Config\Enums\permissions\SettingPermissions;
 use Modules\Permission\Enums\permissions\RolePermissions;
 use Modules\Permission\Enums\permissions\AbilityPermissions;
@@ -47,7 +49,7 @@ class ViewServiceProvider extends ServiceProvider
             $this->registerNotificationAsideMenu();
             $this->registerCrmAsideMenu();
             $this->registerLogAsideMenu();
-            // $this->registerNabdsAsideMenu();
+            $this->registerMedicalAsideMenu();
         });
     }
 
@@ -556,152 +558,152 @@ class ViewServiceProvider extends ServiceProvider
         // End Api Log Section
     }
 
-    // private function registerNabdsAsideMenu()
-    // {
-    //     app('adminHelper')->asideMenu([
-    //         'id'    => 'clinic_management',
-    //         'type'  => 'header',
-    //         'title' => trans('admin::dashboard.aside_menu.clinic_management.title'),
-    //         'order' => 1,
-    //     ]);
+    private function registerMedicalAsideMenu()
+    {
+        app('adminHelper')->asideMenu([
+            'id'    => 'medical_management',
+            'type'  => 'header',
+            'title' => trans('admin::dashboard.aside_menu.medical_management.title'),
+            'order' => 5,
+        ]);
 
-    //     // Start Medical Specialty Section
-    //     app('adminHelper')->asideMenu([
-    //         'id'        => 'medical_specialties_section',
-    //         'parent_id' => 'clinic_management',
-    //         'type'      => 'item',
-    //         'icon'      => 'fa-solid fa-kit-medical',
-    //         'title'     => trans('admin::dashboard.aside_menu.medical_specialty_management.medical_specialties'),
-    //         'order'     => 7,
-    //     ]);
+        // Start Medical Specialty Section
+        app('adminHelper')->asideMenu([
+            'id'        => 'medical_specialties_section',
+            'parent_id' => 'medical_management',
+            'type'      => 'item',
+            'icon'      => 'fa-solid fa-kit-medical',
+            'title'     => trans('admin::dashboard.aside_menu.medical_specialty_management.medical_specialties'),
+            'order'     => 7,
+        ]);
 
-    //     if (app('owner') || app('admin')->can(MedicalSpecialtyPermissions::READ)) {
-    //         app('adminHelper')->asideMenu([
-    //             'id'        => 'view_medical_specialties',
-    //             'parent_id' => 'medical_specialties_section',
-    //             'type'      => 'item',
-    //             'link'      => route('nabd.medical_specialties.index'),
-    //             'title'     => trans('admin::base.view_all'),
-    //             'order'     => 4,
-    //         ]);
-    //     }
+        if (app('owner') || app('admin')->can(MedicalSpecialtiesPermissions::READ)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'view_medical_specialties',
+                'parent_id' => 'medical_management',
+                'type'      => 'item',
+                'link'      => route('cms.contents.index', ['type' => BaseContentTypes::MEDICAL_SPECIALTIES]),
+                'title'     => trans('admin::base.view_all'),
+                'order'     => 4,
+            ]);
+        }
 
-    //     if (app('owner') || app('admin')->can(MedicalSpecialtyPermissions::CREATE)) {
-    //         app('adminHelper')->asideMenu([
-    //             'id'        => 'create_medical_specialties',
-    //             'parent_id' => 'medical_specialties_section',
-    //             'type'      => 'item',
-    //             'link'      => route('nabd.medical_specialties.create'),
-    //             'title'     => trans('admin::base.create_new'),
-    //             'order'     => 4,
-    //         ]);
-    //     }
-    //     // End Medical Specialty Section
+        if (app('owner') || app('admin')->can(MedicalSpecialtiesPermissions::CREATE)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'create_medical_specialties',
+                'parent_id' => 'medical_specialties_section',
+                'type'      => 'item',
+                'link'      => route('cms.contents.create', ['type' => BaseContentTypes::MEDICAL_SPECIALTIES]),
+                'title'     => trans('admin::base.create_new'),
+                'order'     => 4,
+            ]);
+        }
+        // End Medical Specialty Section
 
-    //     // Start Clinic Section
-    //     app('adminHelper')->asideMenu([
-    //         'id'        => 'clinics_section',
-    //         'parent_id' => 'clinic_management',
-    //         'type'      => 'item',
-    //         'icon'      => 'fa-solid fa-stethoscope',
-    //         'title'     => trans('admin::dashboard.aside_menu.clinic_management.clinics'),
-    //         'order'     => 7,
-    //     ]);
+        // // Start Clinic Section
+        // app('adminHelper')->asideMenu([
+        //     'id'        => 'clinics_section',
+        //     'parent_id' => 'clinic_management',
+        //     'type'      => 'item',
+        //     'icon'      => 'fa-solid fa-stethoscope',
+        //     'title'     => trans('admin::dashboard.aside_menu.clinic_management.clinics'),
+        //     'order'     => 7,
+        // ]);
 
-    //     if (app('owner') || app('admin')->can(ClinicPermissions::READ)) {
-    //         app('adminHelper')->asideMenu([
-    //             'id'        => 'view_clinics',
-    //             'parent_id' => 'clinics_section',
-    //             'type'      => 'item',
-    //             'link'      => route('nabd.clinics.index'),
-    //             'title'     => trans('admin::base.view_all'),
-    //             'order'     => 4,
-    //         ]);
-    //     }
+        // if (app('owner') || app('admin')->can(ClinicPermissions::READ)) {
+        //     app('adminHelper')->asideMenu([
+        //         'id'        => 'view_clinics',
+        //         'parent_id' => 'clinics_section',
+        //         'type'      => 'item',
+        //         'link'      => route('nabd.clinics.index'),
+        //         'title'     => trans('admin::base.view_all'),
+        //         'order'     => 4,
+        //     ]);
+        // }
 
-    //     if (app('owner') || app('admin')->can(ClinicPermissions::CREATE)) {
-    //         app('adminHelper')->asideMenu([
-    //             'id'        => 'create_clinics',
-    //             'parent_id' => 'clinics_section',
-    //             'type'      => 'item',
-    //             'link'      => route('nabd.clinics.create'),
-    //             'title'     => trans('admin::base.create_new'),
-    //             'order'     => 4,
-    //         ]);
-    //     }
-    //     // End Clinic Section
+        // if (app('owner') || app('admin')->can(ClinicPermissions::CREATE)) {
+        //     app('adminHelper')->asideMenu([
+        //         'id'        => 'create_clinics',
+        //         'parent_id' => 'clinics_section',
+        //         'type'      => 'item',
+        //         'link'      => route('nabd.clinics.create'),
+        //         'title'     => trans('admin::base.create_new'),
+        //         'order'     => 4,
+        //     ]);
+        // }
+        // // End Clinic Section
 
-    //     // Start Doctor Section
-    //     app('adminHelper')->asideMenu([
-    //         'id'        => 'doktros_section',
-    //         'parent_id' => 'clinic_management',
-    //         'type'      => 'item',
-    //         'icon'      => 'fa-solid fa-user-doctor',
-    //         'title'     => trans('admin::dashboard.aside_menu.doctor_management.doctors'),
-    //         'order'     => 7,
-    //     ]);
+        // // Start Doctor Section
+        // app('adminHelper')->asideMenu([
+        //     'id'        => 'doktros_section',
+        //     'parent_id' => 'clinic_management',
+        //     'type'      => 'item',
+        //     'icon'      => 'fa-solid fa-user-doctor',
+        //     'title'     => trans('admin::dashboard.aside_menu.doctor_management.doctors'),
+        //     'order'     => 7,
+        // ]);
 
-    //     if (app('owner') || app('admin')->can(DoctorPermissions::READ)) {
-    //         app('adminHelper')->asideMenu([
-    //             'id'        => 'view_doctors',
-    //             'parent_id' => 'doktros_section',
-    //             'type'      => 'item',
-    //             'link'      => route('nabd.doctors.index'),
-    //             'title'     => trans('admin::base.view_all'),
-    //             'order'     => 4,
-    //         ]);
-    //     }
+        // if (app('owner') || app('admin')->can(DoctorPermissions::READ)) {
+        //     app('adminHelper')->asideMenu([
+        //         'id'        => 'view_doctors',
+        //         'parent_id' => 'doktros_section',
+        //         'type'      => 'item',
+        //         'link'      => route('nabd.doctors.index'),
+        //         'title'     => trans('admin::base.view_all'),
+        //         'order'     => 4,
+        //     ]);
+        // }
 
-    //     if (app('owner') || app('admin')->can(DoctorPermissions::CREATE)) {
-    //         app('adminHelper')->asideMenu([
-    //             'id'        => 'create_doctors',
-    //             'parent_id' => 'doctors_section',
-    //             'type'      => 'item',
-    //             'link'      => route('nabd.doctors.create'),
-    //             'title'     => trans('admin::base.create_new'),
-    //             'order'     => 4,
-    //         ]);
-    //     }
-    //     // End Doctor Section
+        // if (app('owner') || app('admin')->can(DoctorPermissions::CREATE)) {
+        //     app('adminHelper')->asideMenu([
+        //         'id'        => 'create_doctors',
+        //         'parent_id' => 'doctors_section',
+        //         'type'      => 'item',
+        //         'link'      => route('nabd.doctors.create'),
+        //         'title'     => trans('admin::base.create_new'),
+        //         'order'     => 4,
+        //     ]);
+        // }
+        // // End Doctor Section
 
-    //     // Start Pharmacy Section
-    //     app('adminHelper')->asideMenu([
-    //         'id'    => 'pharmacy_management',
-    //         'type'  => 'header',
-    //         'title' => trans('admin::dashboard.aside_menu.pharmacy_management.title'),
-    //         'order' => 1,
-    //     ]);
+        // // Start Pharmacy Section
+        // app('adminHelper')->asideMenu([
+        //     'id'    => 'pharmacy_management',
+        //     'type'  => 'header',
+        //     'title' => trans('admin::dashboard.aside_menu.pharmacy_management.title'),
+        //     'order' => 1,
+        // ]);
 
-    //     app('adminHelper')->asideMenu([
-    //         'id'        => 'pharmacies_section',
-    //         'parent_id' => 'pharmacy_management',
-    //         'type'      => 'item',
-    //         'icon'      => 'fa-solid fa-prescription-bottle',
-    //         'title'     => trans('admin::dashboard.aside_menu.pharmacy_management.pharmacies'),
-    //         'order'     => 7,
-    //     ]);
+        // app('adminHelper')->asideMenu([
+        //     'id'        => 'pharmacies_section',
+        //     'parent_id' => 'pharmacy_management',
+        //     'type'      => 'item',
+        //     'icon'      => 'fa-solid fa-prescription-bottle',
+        //     'title'     => trans('admin::dashboard.aside_menu.pharmacy_management.pharmacies'),
+        //     'order'     => 7,
+        // ]);
 
-    //     if (app('owner') || app('admin')->can(PharmacyPermissions::READ)) {
-    //         app('adminHelper')->asideMenu([
-    //             'id'        => 'view_pharmacies',
-    //             'parent_id' => 'pharmacies_section',
-    //             'type'      => 'item',
-    //             'link'      => route('nabd.pharmacies.index'),
-    //             'title'     => trans('admin::base.view_all'),
-    //             'order'     => 4,
-    //         ]);
-    //     }
+        // if (app('owner') || app('admin')->can(PharmacyPermissions::READ)) {
+        //     app('adminHelper')->asideMenu([
+        //         'id'        => 'view_pharmacies',
+        //         'parent_id' => 'pharmacies_section',
+        //         'type'      => 'item',
+        //         'link'      => route('nabd.pharmacies.index'),
+        //         'title'     => trans('admin::base.view_all'),
+        //         'order'     => 4,
+        //     ]);
+        // }
 
-    //     if (app('owner') || app('admin')->can(PharmacyPermissions::CREATE)) {
-    //         app('adminHelper')->asideMenu([
-    //             'id'        => 'create_pharmacies',
-    //             'parent_id' => 'pharmacies_section',
-    //             'type'      => 'item',
-    //             'link'      => route('nabd.pharmacies.create'),
-    //             'title'     => trans('admin::base.create_new'),
-    //             'order'     => 4,
-    //         ]);
-    //     }
-    //     // End Clinic Section
-    // }
+        // if (app('owner') || app('admin')->can(PharmacyPermissions::CREATE)) {
+        //     app('adminHelper')->asideMenu([
+        //         'id'        => 'create_pharmacies',
+        //         'parent_id' => 'pharmacies_section',
+        //         'type'      => 'item',
+        //         'link'      => route('nabd.pharmacies.create'),
+        //         'title'     => trans('admin::base.create_new'),
+        //         'order'     => 4,
+        //     ]);
+        // }
+        // // End Clinic Section
+    }
 }

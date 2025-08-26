@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Modules\Cms\Models\Content;
 use Modules\Cms\Enums\contents\BasePageSlugs;
 use Modules\Cms\Enums\contents\BaseContentTypes;
+use Modules\Cms\Models\ContentTranslation;
 
 class ContentSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class ContentSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->seedMedicalSpecialties();
         $this->seedBasePageContent();
         $this->seedFakeContent();
     }
@@ -56,5 +58,22 @@ class ContentSeeder extends Seeder
         Content::factory()
         ->count(10)
         ->create();
+    }
+
+    private function seedMedicalSpecialties()
+    {
+        $mdecialSpecialties  = Content::byType(BaseContentTypes::MEDICAL_SPECIALTIES)->count();
+
+        if($mdecialSpecialties > 0) return;
+
+        $medicalSpecialties              = require module_path('Nabd', 'database/seeders/Templates/medical_specialties.php');
+        $medicalSpecialtyTranslations    = require module_path('Nabd', 'database/seeders/Templates/medical_specialty_translations.php');
+
+        foreach(collect($medicalSpecialties)->chunk(100) as $chunkedMedicalSpecialties) {
+            Content::insert($chunkedMedicalSpecialties->toArray());
+        }
+        foreach(collect($medicalSpecialtyTranslations)->chunk(100) as $chunkedMedicalSpecialtyTranslations) {
+            ContentTranslation::insert($chunkedMedicalSpecialtyTranslations->toArray());
+        }
     }
 }

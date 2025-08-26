@@ -95,6 +95,17 @@ trait ContentTrait
                 ],
             ],
         ],
+
+        BaseContentTypes::MEDICAL_SPECIALTIES     => [
+            'icon'                  => 'fa-solid fa-kit-medical',
+            'show_in_menu'          => false,
+            'name'                  => 'cms::contents.medical_specialties.title',
+            'fields'                => [
+                'title'             => [
+                    'required'      => true,
+                ],
+            ],
+        ],
     ];
 
     /**

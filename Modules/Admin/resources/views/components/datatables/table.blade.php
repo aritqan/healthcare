@@ -171,6 +171,7 @@
                                 @endforeach
                             },
                             error: function (xhr, error, code) {
+                                console.log(error);
                                 return handleFailResponse(error);
                             }
                         },

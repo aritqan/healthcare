@@ -118,6 +118,9 @@ return [
         'home_page'                     => [
             'list_title'                => 'قائمة الصفحة الرئيسية',
         ],
+        'medical-specialties'           => [
+            'list_title'                => 'قائمة التخصصات الطبية',
+        ],
     ],
     'categories'                        => [
         'list_title'                    => 'قائمة التصنيفات',

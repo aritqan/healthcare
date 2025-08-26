@@ -107,6 +107,9 @@ return [
             'title'                         => 'إدارة التخصصات الطبية',
             'medical_specialties'           => 'التخصصات الطبية',
         ],
+        'medical_management'                => [
+            'title'                         => 'إدارة الأقسام الطبية',
+        ],
     ],
 
     'breadcrumbs'                           => [

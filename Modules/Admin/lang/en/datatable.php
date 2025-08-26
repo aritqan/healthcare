@@ -116,6 +116,9 @@ return [
         'home_page'                     => [
             'list_title'                => 'Home Page List',
         ],
+        'medical-specialties'           => [
+            'list_title'                => 'Medical Specialties List',
+        ],
     ],
     'categories'                        => [
         'list_title'                    => 'Categories List',

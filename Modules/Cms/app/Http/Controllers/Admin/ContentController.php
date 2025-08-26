@@ -2,12 +2,13 @@
 
 namespace Modules\Cms\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Modules\Cms\Models\Content;
+use Illuminate\Support\Facades\Route;
 use Modules\Cms\Http\Requests\ContentRequest;
 use Modules\Cms\Http\Services\ContentService;
 use Illuminate\Routing\Controllers\Middleware;
-use Illuminate\Support\Facades\Route;
 use Modules\Base\Http\Controllers\BaseCrudController;
 
 class ContentController extends BaseCrudController
@@ -40,7 +41,7 @@ class ContentController extends BaseCrudController
     {
         if(app()->runningInConsole()) return [];
 
-        $permissionClass = 'Modules\\Cms\\Enums\\permissions\\' . ucfirst(request('type')) . 'Permissions';
+        $permissionClass = 'Modules\\Cms\\Enums\\permissions\\' . Str::studly(request('type')) . 'Permissions';
 
         if (!class_exists($permissionClass)) {
             abort(404, 'Permission class not found.');
@@ -74,7 +75,8 @@ class ContentController extends BaseCrudController
         $this->routeParameters  = ['type' => $this->type];
 
         app('adminHelper')->addBreadcrumbs(trans_choice('cms::contents.content_categories.' . $this->type, 1), route($this->routePrefix . '.index', ['type' => $this->type]));
-        static::$permissionClass = 'Modules\\Cms\\Enums\\permissions\\' . ucfirst($this->type) . 'Permissions';
+
+        static::$permissionClass = 'Modules\\Cms\\Enums\\permissions\\' . Str::studly(request('type')) . 'Permissions';
 
         $this->data['type'] = $this->type;
 
