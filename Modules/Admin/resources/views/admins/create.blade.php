@@ -1,10 +1,14 @@
-@extends('admin::layouts.master', ['title' => trans('admin::cruds.admins.add')])
+@extends('admin::layouts.master', ['title' => trans('admin::cruds.' . $roleName . '.add')])
+
+@php
+    use Modules\Permission\Enums\SystemDefaultRoles;
+@endphp
 
 @section('toolbar')
     @include('admin::includes.toolbar', [
         'options'               => [
-            'title'             => trans('admin::dashboard.aside_menu.user_management.admins'),
-            'backUrl'           => route('admin.admins.index'),
+            'title'             => trans('admin::dashboard.aside_menu.user_management.' . $roleName),
+            'backUrl'           => route('admin.admins.index', ['role' => e(request('role'))]),
             'actions'           => [
                 'save'          => true,
                 'back'          => true,
@@ -22,14 +26,14 @@
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
                         <h3 class="card-title">
-                            @lang('admin::cruds.admins.add')
+                            @lang('admin::cruds.'.$roleName.'.add')
                         </h3>
                     </div>
                     <div class="card-body">
                         @component('admin::components.forms.form', [
                                 'options'       => [
                                     'isAjax'    => true,
-                                    'action'    => route('admin.admins.postCreate'),
+                                    'action'    => route('admin.admins.postCreate', ['role' => e(request('role'))]),
                                 ]
                             ])
                             @slot('fields')
@@ -135,6 +139,37 @@
                                 </div>
 
                                 <div class="row">
+                                    <div @class(['col-lg-6 col-12 mb-10 form-group', 'd-none' => ! checkIfRoleStateRequired(e(request('role')))])>
+                                        @include('admin::components.inputs.select', [
+                                            'options'           => [
+                                                'name'          => 'state_id',
+                                                'label'         => trans('admin::inputs.clinic_crud.state_id.label'),
+                                                'placeholder'   => trans('admin::inputs.clinic_crud.state_id.placeholder'),
+                                                'help'          => trans('admin::inputs.clinic_crud.state_id.help'),
+                                                'required'      => true,
+                                                'data'          => getStatesForCountry('SYR'),
+                                                'text'          => fn($key, $value) => $value->smartTrans('name'),
+                                                'values'        => fn($key, $value) => $value->id,
+                                            ]
+                                        ])
+                                    </div>
+                                    <div @class(['col-lg-6 col-12 mb-10 form-group', 'd-none' => strtoupper(e(request('role'))) == SystemDefaultRoles::CLINIC || e(request('role')) == SystemDefaultRoles::PHARMACY])>
+                                        @include('admin::components.inputs.select', [
+                                            'options'           => [
+                                                'name'          => 'gender',
+                                                'label'         => trans('admin::inputs.admin_crud.gender.label'),
+                                                'placeholder'   => trans('admin::inputs.admin_crud.gender.placeholder'),
+                                                'help'          => trans('admin::inputs.admin_crud.gender.help'),
+                                                'required'      => true,
+                                                'data'          => $genderTypes,
+                                                'text'          => fn($key, $value) => $value,
+                                                'values'        => fn($key, $value) => $key,
+                                            ]
+                                        ])
+                                    </div>
+                                </div>
+
+                                {{-- <div class="row">
                                     <div class="col-lg-6 col-12 mb-10 form-group">
                                         @include('admin::components.inputs.password', [
                                             'options'           => [
@@ -158,25 +193,7 @@
                                             ]
                                         ])
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-6 col-12 mb-10 form-group">
-                                        @include('admin::components.inputs.select', [
-                                            'options'           => [
-                                                'name'          => 'gender',
-                                                'label'         => trans('admin::inputs.admin_crud.gender.label'),
-                                                'placeholder'   => trans('admin::inputs.admin_crud.gender.placeholder'),
-                                                'help'          => trans('admin::inputs.admin_crud.gender.help'),
-                                                'required'      => true,
-                                                'data'          => $genderTypes,
-                                                'text'          => fn($key, $value) => $value,
-                                                'values'        => fn($key, $value) => $key,
-                                            ]
-                                        ])
-                                    </div>
-
-                                </div>
+                                </div> --}}
 
                                 <div class="separator separator-dashed my-5"></div>
 
@@ -186,13 +203,14 @@
                                     </label>
 
                                     @foreach ($roles as $role)
-                                        <div class="d-flex fv-row">
+                                        <div @class(['d-flex fv-row'])>
                                             <div class="form-check form-check-custom form-check-solid">
                                                 @include('admin::components.inputs.radio', [
                                                     'options'           => [
                                                         'id'            => $role->id,
                                                         'value'         => $role->id,
-                                                        'name'          => 'role',
+                                                        'name'          => 'role_id',
+                                                        'checked'       => $role->name == strtoupper(e(request('role'))) ? true : false,
                                                         'label'         =>
                                                         '<div class="fw-bolder text-gray-800">'. $role->smartTrans('title') .'</div>
                                                         <div class="text-gray-600">'. $role->smartTrans('description') .'</div>'

@@ -17,12 +17,13 @@ use Modules\Zms\Enums\permissions\CountryPermissions;
 use Modules\Crm\Enums\permissions\ContactusPermissions;
 use Modules\Crm\Enums\permissions\SubscribePermissions;
 use Modules\Log\Enums\permissions\ApiLogPermissions;
-use Modules\Nabd\Enums\permissions\ClinicPermissions;
+use Modules\Admin\Enums\permissions\ClinicPermissions;
 use Modules\Nabd\Enums\permissions\DoctorPermissions;
 use Modules\Nabd\Enums\permissions\MedicalSpecialtyPermissions;
-use Modules\Nabd\Enums\permissions\PharmacyPermissions;
+use Modules\Admin\Enums\permissions\PharmacyPermissions;
 use Modules\Notification\Enums\permissions\NotificationPermissions;
 use Modules\Notification\Enums\permissions\NotificationTemplatePermissions;
+use Modules\Permission\Enums\SystemDefaultRoles;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -89,7 +90,7 @@ class ViewServiceProvider extends ServiceProvider
                 'id'        => 'view_admins',
                 'parent_id' => 'admins_section',
                 'type'      => 'item',
-                'link'      => route('admin.admins.index'),
+                'link'      => route('admin.admins.index', ['role' => SystemDefaultRoles::SYSTEM_ADMIN_ROLE]),
                 'title'     => trans('admin::base.view_all'),
                 'order'     => 4,
             ]);
@@ -100,7 +101,7 @@ class ViewServiceProvider extends ServiceProvider
                 'id'        => 'create_admins',
                 'parent_id' => 'admins_section',
                 'type'      => 'item',
-                'link'      => route('admin.admins.create'),
+                'link'      => route('admin.admins.create', ['role' => SystemDefaultRoles::SYSTEM_ADMIN_ROLE]),
                 'title'     => trans('admin::base.create_new'),
                 'order'     => 4,
             ]);
@@ -600,110 +601,70 @@ class ViewServiceProvider extends ServiceProvider
         }
         // End Medical Specialty Section
 
-        // // Start Clinic Section
-        // app('adminHelper')->asideMenu([
-        //     'id'        => 'clinics_section',
-        //     'parent_id' => 'clinic_management',
-        //     'type'      => 'item',
-        //     'icon'      => 'fa-solid fa-stethoscope',
-        //     'title'     => trans('admin::dashboard.aside_menu.clinic_management.clinics'),
-        //     'order'     => 7,
-        // ]);
+        // Start Clinic Section
+        app('adminHelper')->asideMenu([
+            'id'        => 'clinics_section',
+            'parent_id' => 'medical_management',
+            'type'      => 'item',
+            'icon'      => 'fa-solid fa-stethoscope',
+            'title'     => trans('admin::dashboard.aside_menu.user_management.clinics'),
+            'order'     => 8,
+        ]);
 
-        // if (app('owner') || app('admin')->can(ClinicPermissions::READ)) {
-        //     app('adminHelper')->asideMenu([
-        //         'id'        => 'view_clinics',
-        //         'parent_id' => 'clinics_section',
-        //         'type'      => 'item',
-        //         'link'      => route('nabd.clinics.index'),
-        //         'title'     => trans('admin::base.view_all'),
-        //         'order'     => 4,
-        //     ]);
-        // }
+        if (app('owner') || app('admin')->can(ClinicPermissions::READ)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'view_clinics',
+                'parent_id' => 'clinics_section',
+                'type'      => 'item',
+                'link'      => route('admin.admins.index', ['role' => SystemDefaultRoles::CLINIC]),
+                'title'     => trans('admin::base.view_all'),
+                'order'     => 4,
+            ]);
+        }
 
-        // if (app('owner') || app('admin')->can(ClinicPermissions::CREATE)) {
-        //     app('adminHelper')->asideMenu([
-        //         'id'        => 'create_clinics',
-        //         'parent_id' => 'clinics_section',
-        //         'type'      => 'item',
-        //         'link'      => route('nabd.clinics.create'),
-        //         'title'     => trans('admin::base.create_new'),
-        //         'order'     => 4,
-        //     ]);
-        // }
-        // // End Clinic Section
+        if (app('owner') || app('admin')->can(ClinicPermissions::CREATE)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'create_clinics',
+                'parent_id' => 'clinics_section',
+                'type'      => 'item',
+                'link'      => route('admin.admins.create', ['role' => SystemDefaultRoles::CLINIC]),
+                'title'     => trans('admin::base.create_new'),
+                'order'     => 4,
+            ]);
+        }
+        // End Clinic Section
 
-        // // Start Doctor Section
-        // app('adminHelper')->asideMenu([
-        //     'id'        => 'doktros_section',
-        //     'parent_id' => 'clinic_management',
-        //     'type'      => 'item',
-        //     'icon'      => 'fa-solid fa-user-doctor',
-        //     'title'     => trans('admin::dashboard.aside_menu.doctor_management.doctors'),
-        //     'order'     => 7,
-        // ]);
+        // Start Pharmacy Section
+        app('adminHelper')->asideMenu([
+            'id'        => 'pharmacies_section',
+            'parent_id' => 'medical_management',
+            'type'      => 'item',
+            'icon'      => 'fa-solid fa-prescription-bottle',
+            'title'     => trans('admin::dashboard.aside_menu.user_management.pharmacies'),
+            'order'     => 8,
+        ]);
 
-        // if (app('owner') || app('admin')->can(DoctorPermissions::READ)) {
-        //     app('adminHelper')->asideMenu([
-        //         'id'        => 'view_doctors',
-        //         'parent_id' => 'doktros_section',
-        //         'type'      => 'item',
-        //         'link'      => route('nabd.doctors.index'),
-        //         'title'     => trans('admin::base.view_all'),
-        //         'order'     => 4,
-        //     ]);
-        // }
+        if (app('owner') || app('admin')->can(PharmacyPermissions::READ)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'view_pharmacies',
+                'parent_id' => 'pharmacies_section',
+                'type'      => 'item',
+                'link'      => route('admin.admins.index', ['role' => SystemDefaultRoles::PHARMACY]),
+                'title'     => trans('admin::base.view_all'),
+                'order'     => 4,
+            ]);
+        }
 
-        // if (app('owner') || app('admin')->can(DoctorPermissions::CREATE)) {
-        //     app('adminHelper')->asideMenu([
-        //         'id'        => 'create_doctors',
-        //         'parent_id' => 'doctors_section',
-        //         'type'      => 'item',
-        //         'link'      => route('nabd.doctors.create'),
-        //         'title'     => trans('admin::base.create_new'),
-        //         'order'     => 4,
-        //     ]);
-        // }
-        // // End Doctor Section
-
-        // // Start Pharmacy Section
-        // app('adminHelper')->asideMenu([
-        //     'id'    => 'pharmacy_management',
-        //     'type'  => 'header',
-        //     'title' => trans('admin::dashboard.aside_menu.pharmacy_management.title'),
-        //     'order' => 1,
-        // ]);
-
-        // app('adminHelper')->asideMenu([
-        //     'id'        => 'pharmacies_section',
-        //     'parent_id' => 'pharmacy_management',
-        //     'type'      => 'item',
-        //     'icon'      => 'fa-solid fa-prescription-bottle',
-        //     'title'     => trans('admin::dashboard.aside_menu.pharmacy_management.pharmacies'),
-        //     'order'     => 7,
-        // ]);
-
-        // if (app('owner') || app('admin')->can(PharmacyPermissions::READ)) {
-        //     app('adminHelper')->asideMenu([
-        //         'id'        => 'view_pharmacies',
-        //         'parent_id' => 'pharmacies_section',
-        //         'type'      => 'item',
-        //         'link'      => route('nabd.pharmacies.index'),
-        //         'title'     => trans('admin::base.view_all'),
-        //         'order'     => 4,
-        //     ]);
-        // }
-
-        // if (app('owner') || app('admin')->can(PharmacyPermissions::CREATE)) {
-        //     app('adminHelper')->asideMenu([
-        //         'id'        => 'create_pharmacies',
-        //         'parent_id' => 'pharmacies_section',
-        //         'type'      => 'item',
-        //         'link'      => route('nabd.pharmacies.create'),
-        //         'title'     => trans('admin::base.create_new'),
-        //         'order'     => 4,
-        //     ]);
-        // }
-        // // End Clinic Section
+        if (app('owner') || app('admin')->can(PharmacyPermissions::CREATE)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'create_pharmacies',
+                'parent_id' => 'pharmacies_section',
+                'type'      => 'item',
+                'link'      => route('admin.admins.create', ['role' => SystemDefaultRoles::PHARMACY]),
+                'title'     => trans('admin::base.create_new'),
+                'order'     => 4,
+            ]);
+        }
+        // End Pharmacy Section
     }
 }

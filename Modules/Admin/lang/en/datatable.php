@@ -214,4 +214,9 @@ return [
         'columns'                       => [
         ],
     ],
+    'system_admins'                     => [
+        'list_title'                    => 'Admins List',
+        'columns'                       => [
+        ]
+    ],
 ];

@@ -1,11 +1,11 @@
 @extends('admin::layouts.master', [
-    'title' => trans('admin::dashboard.aside_menu.user_management.admins')
+    'title' => trans('admin::dashboard.aside_menu.user_management.' . $roleName)
 ])
 
 @section('toolbar')
     @component('admin::includes.toolbar', [
             'options'               => [
-                'title'             => trans('admin::dashboard.aside_menu.user_management.admins'),
+                'title'             => trans('admin::dashboard.aside_menu.user_management.' . $roleName),
                 'actions'           => [
                     'filter'        => true,
                     'search'        => true,
@@ -72,7 +72,7 @@
                     @include('admin::components.datatables.header.title', [
                         'options'   => [
                             'role'  => $viewTrashPermission,
-                            'title' => trans('admin::datatable.admins.list_title'),
+                            'title' => trans('admin::datatable.'.$roleName.'.list_title'),
                         ]
                     ])
                 </div>
@@ -84,7 +84,7 @@
                         'options'               => [
                             'role'              => $createPermission,
                             'multiActions'      => $bulkActionDropdown,
-                            'route'             => route('admin.admins.create'),
+                            'route'             => route('admin.admins.create', ['role' => e(request('role'))]),
                         ]
                     ])
                 </div>
@@ -96,7 +96,7 @@
             <div class="card-body  py-4">
                 @component('admin::components.datatables.table', [
                         'options'           => [
-                            'url'           => route('admin.admins.datatable'),
+                            'url'           => route('admin.admins.datatable', ['role' => e(request('role'))]),
                             'withCheckbox'  => true,
                             'filter'        => true,
                         ]

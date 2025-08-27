@@ -215,4 +215,9 @@ return [
         'columns'                       => [
         ],
     ],
+    'system_admins'                     => [
+        'list_title'                    => 'قائمة المشرفين',
+        'columns'                       => [
+        ]
+    ],
 ];

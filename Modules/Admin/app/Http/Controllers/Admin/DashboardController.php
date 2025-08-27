@@ -12,6 +12,7 @@ use Modules\Base\Http\Controllers\BaseController;
 use Modules\Cms\Models\ContentCategory;
 use Modules\Crm\Models\Contactus;
 use Modules\Crm\Models\Subscribe;
+use Modules\Permission\Enums\SystemDefaultRoles;
 use Modules\Permission\Models\Role;
 
 class DashboardController extends BaseController
@@ -63,7 +64,8 @@ class DashboardController extends BaseController
             label       : trans('admin::dashboard.aside_menu.user_management.admins'),
             modelClass  : Admin::class,
             fromDate    : $this->data['fromDate'],
-            toDate      : $this->data['toDate']
+            toDate      : $this->data['toDate'],
+            routeParameters: ['role' => SystemDefaultRoles::SYSTEM_ADMIN_ROLE]
         );
     }
 

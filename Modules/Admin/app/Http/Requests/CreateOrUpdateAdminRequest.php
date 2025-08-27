@@ -7,8 +7,11 @@ use Modules\Base\Enums\Gender;
 use Illuminate\Validation\Rules\File;
 use Modules\Admin\Enums\AdminStatus;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rules\RequiredIf;
 use Modules\Base\Http\Requests\BaseRequest;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Modules\Permission\Enums\SystemDefaultRoles;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateOrUpdateAdminRequest extends BaseRequest
 {
@@ -26,16 +29,17 @@ class CreateOrUpdateAdminRequest extends BaseRequest
             'username'              => ['required', 'string', 'min:5', 'max:255', 'regex:/^[a-z0-9_]+$/', Rule::unique('admins', 'username')->ignore($this->model)],
             'email'                 => ['required', 'email', 'max:255', Rule::unique('admins', 'email')->ignore($this->model)],
             'phone_number'          => ['required', 'string', 'min:5', 'max:255', Rule::unique('admins', 'phone_number')->ignore($this->model)],
-            'password'              => ['confirmed', Password::defaults()],
-            'gender'                => ['required', 'in:' . implode(',', Gender::all())],
-            'role'                  => ['required', 'exists:roles,id'],
+            // 'password'              => ['confirmed', Password::defaults()],
+            'gender'                => ['nullable', 'in:' . implode(',', Gender::all())],
+            'role_id'               => ['required', 'exists:roles,id'],
+            'state_id'              => [Rule::requiredIf(fn() => checkIfRoleStateRequired($this->role)), 'nullable', 'exists:states,id'],
         ];
 
-        if($this->isUpdate()) {
-            array_push($rules['password'], 'nullable');
-        } else {
-            array_push($rules['password'], 'required');
-        }
+        // if($this->isUpdate()) {
+        //     array_push($rules['password'], 'nullable');
+        // } else {
+        //     array_push($rules['password'], 'required');
+        // }
 
         return $rules;
     }

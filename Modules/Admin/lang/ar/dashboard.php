@@ -18,7 +18,11 @@ return [
             'roles'                         => 'الأدوار',
             'permissions'                   => 'الصلاحيات',
             'admins'                        => 'المشرفين',
+            'system_admins'                 => 'المشرفين',
             'users'                         => 'المستخدمين',
+            'clinics'                       => 'العيادات',
+            'doctors'                       => 'الاطباء',
+            'pharmacies'                    => 'الصيدليات',
         ],
         'zone_management'                   => [
             'title'                         => 'إدارة المناطق',

@@ -1000,6 +1000,7 @@
             const input = $(this);
             const fullNumberName = input.data('full-number-name');
             const value = input.data('value');
+
             setupIntlTelInput(input.attr('id'), fullNumberName, value);
         });
     });

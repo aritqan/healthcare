@@ -5,7 +5,6 @@ namespace Modules\Cms\Http\Controllers\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Modules\Cms\Models\Content;
-use Illuminate\Support\Facades\Route;
 use Modules\Cms\Http\Requests\ContentRequest;
 use Modules\Cms\Http\Services\ContentService;
 use Illuminate\Routing\Controllers\Middleware;
@@ -105,9 +104,7 @@ class ContentController extends BaseCrudController
 
     public function canDelete($model)
     {
-        if(! $model->can_be_deleted) {
-            return sendFailInternalResponse('content_cannot_be_deleted');
-        }
+        if(! $model->can_be_deleted) return sendFailInternalResponse('content_cannot_be_deleted');
 
         return sendSuccessInternalResponse();
     }

@@ -6,6 +6,7 @@ use Modules\Admin\Http\Controllers\Auth\AdminAuthController;
 use Modules\Admin\Http\Controllers\Admin\AdminCrudController;
 use Modules\Admin\Http\Controllers\Admin\DashboardController;
 use Modules\Admin\Http\Controllers\Auth\AdminProfileController;
+use Modules\Permission\Enums\SystemDefaultRoles;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ Route::prefix('profile')->name('profile.')->controller(AdminProfileController::c
 });
 
 // Admin Crud Section
-Route::prefix('admins')->name('admins.')->controller(AdminCrudController::class)->group(function () {
+Route::prefix('admins/{role}')->name('admins.')->controller(AdminCrudController::class)->group(function () {
     Route::get('list'                           , 'index')->name('index');
     Route::get('datatable'                      , 'datatable')->name('datatable');
     Route::get('ajax-list'                      , 'ajaxList')->name('ajaxList');
@@ -61,4 +62,4 @@ Route::prefix('admins')->name('admins.')->controller(AdminCrudController::class)
     Route::post('bulk-restore'                  , 'bulkRestore')->name('bulkRestore');
     Route::post('bulk-disable'                  , 'bulkDisable')->name('bulkDisable');
     Route::post('bulk-enable'                   , 'bulkEnable')->name('bulkEnable');
-});
+})->whereIn('role', SystemDefaultRoles::all());

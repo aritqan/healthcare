@@ -21,7 +21,10 @@ use Modules\Permission\Enums\SystemDefaultRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Modules\Admin\Enums\permissions\AdminPermissions;
+use Modules\Nabd\Enums\MedicalFacilitesTypes;
+use Modules\Nabd\Models\MedicalFacility;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 
@@ -43,6 +46,11 @@ class Admin extends User implements HasMedia, Auditable
         'lang',
         'last_login_at',
         'gender',
+        'password_is_temp',
+    ];
+
+    protected $with = [
+        'profile'
     ];
 
     /**
@@ -76,6 +84,15 @@ class Admin extends User implements HasMedia, Auditable
         'remember_token',
         'last_login_at',
         'ip_address',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'password_is_temp' => 'boolean',
     ];
 
     public const MEDIA_COLLECTION = 'admin_avatar';
@@ -117,6 +134,20 @@ class Admin extends User implements HasMedia, Auditable
         return $this->belongsToMany(Role::class, 'assigned_roles', 'entity_id', 'role_id')->withoutGlobalScope('withoutRoot')->withPivot('scope');
     }
 
+    public function profile(): HasOne
+    {
+        return $this->hasOne(MedicalFacility::class);
+    }
+
+    public function clinic(): HasOne
+    {
+        return $this->hasOne(MedicalFacility::class)->where('type', MedicalFacilitesTypes::CLINIC);
+    }
+
+    public function pharmacy(): HasOne
+    {
+        return $this->hasOne(MedicalFacility::class)->where('type', MedicalFacilitesTypes::PHARMACY);
+    }
     // End Relationships
 
     // Start Scopes
@@ -177,7 +208,11 @@ class Admin extends User implements HasMedia, Auditable
 
     public function getDataTable(array $data) : JsonResponse
     {
-        $model = $this::with('roles.translations')->exceptRoot()->exceptCurrentAdmin()->withDisabled();
+        $model = $this::with('roles.translations')
+        ->whereIs($data['role'] ?? SystemDefaultRoles::SYSTEM_ADMIN_ROLE)
+        ->exceptRoot()
+        ->exceptCurrentAdmin()
+        ->withDisabled();
 
         if($this->shouldShowTrash($data, AdminPermissions::VIEW_TRASH)) {
             $model = $model->onlyTrashed();
@@ -195,7 +230,7 @@ class Admin extends User implements HasMedia, Auditable
                     $query->advancedSearch($data['advanced_search']);
                 }
             })
-            ->addColumn('actions', function ($model) use($canLoginToAnotherAccount, $additionalActions){
+            ->addColumn('actions', function ($model) use($canLoginToAnotherAccount, $additionalActions, $data){
                 $excludeActions = [VIEW_ACTION];
 
                 if($canLoginToAnotherAccount) {
@@ -205,6 +240,7 @@ class Admin extends User implements HasMedia, Auditable
                 return
                     app('customDataTable')
                     ->routePrefix('admin.admins')
+                    ->setRouteParameters(['role' => $data['role']])
                     ->of($model, AdminPermissions::PERMISSION_NAMESPACE)
                     ->excludeActions($excludeActions)
                     ->getDatatableActions(additionalActions: $additionalActions, withMainCrudActions: true);

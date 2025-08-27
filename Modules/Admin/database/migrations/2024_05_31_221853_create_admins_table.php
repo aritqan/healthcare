@@ -27,6 +27,7 @@ return new class extends Migration
             $table->ipAddress('ip_address')->nullable();
             $table->rememberToken();
             $table->timestamp('last_login_at')->nullable();
+            $table->boolean('password_is_temp')->default(false);
             $table->timestamps();
             $table->disableable();
             $table->softDeletes();

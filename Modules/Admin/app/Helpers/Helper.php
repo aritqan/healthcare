@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Str;
 use Nwidart\Modules\Facades\Module;
+use Modules\Permission\Enums\SystemDefaultRoles;
 
 if (!function_exists('dashboardSetItem')) {
     /**
@@ -26,7 +27,8 @@ if (!function_exists('dashboardSetItem')) {
         ?Closure $customQuery   = null,
         bool $hideIfEmpty       = false,
         ?string $icon           = null,
-        ?string $route          = null
+        ?string $route          = null,
+        array $routeParameters  = []
     ): ?array {
         $query = $modelClass::query();
 
@@ -42,7 +44,7 @@ if (!function_exists('dashboardSetItem')) {
             'key'   => $key,
             'label' => $label,
             'icon'  => $icon ?? getDashboardIcon($key),
-            'route' => $route ?? getDashboardRoute($modelClass, $key),
+            'route' => $route ?? getDashboardRoute($modelClass, $key, $routeParameters),
             'count' => $count,
         ];
     }
@@ -64,11 +66,11 @@ if (!function_exists('getDashboardRoute')) {
      * @param string $modelClass
      * @param string $key
      */
-    function getDashboardRoute(string $modelClass, string $key): string
+    function getDashboardRoute(string $modelClass, string $key, array $routeParameters = []): string
     {
         $module = getModuleNameFromModel($modelClass);
 
-        return $module ? route($module . '.' . Str::plural($key) . '.index') : '#';
+        return $module ? route($module . '.' . Str::plural($key) . '.index', $routeParameters) : '#';
     }
 }
 
@@ -94,5 +96,17 @@ if (!function_exists('getModuleNameFromModel')) {
         }
 
         return null;
+    }
+}
+
+if(! function_exists('checkIfRoleStateRequired')) {
+    /**
+     * @param string $roleState
+     * @param string $roleStateRequired
+     * @return bool
+     */
+    function checkIfRoleStateRequired(string $roleName): bool
+    {
+        return in_array(strtoupper($roleName), [SystemDefaultRoles::CLINIC, SystemDefaultRoles::PHARMACY]);
     }
 }

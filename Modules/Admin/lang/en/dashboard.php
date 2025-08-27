@@ -18,7 +18,11 @@ return [
             'roles'                         => 'Roles',
             'permissions'                   => 'Permissions',
             'admins'                        => 'Admins',
+            'system_admins'                 => 'Admins',
             'users'                         => 'Users',
+            'clinics'                       => 'Clinics',
+            'doctors'                       => 'Doctors',
+            'pharmacies'                    => 'Pharmacies',
         ],
         'zone_management'                   => [
             'title'                         => 'Zone Management',

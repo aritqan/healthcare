@@ -114,7 +114,7 @@ class AuditController extends BaseController implements HasMiddleware
         switch ($this->modelType) {
             case AdminPermissions::PERMISSION_NAMESPACE :
                 $this->modelName = trans('admin::dashboard.aside_menu.user_management.admins');
-                app('adminHelper')->addBreadcrumbs($this->modelName, route('admin.admins.index'));
+                app('adminHelper')->addBreadcrumbs($this->modelName, route('admin.admins.index', ['role' => SystemDefaultRoles::SYSTEM_ADMIN_ROLE]));
                 break;
             case UserPermissions::PERMISSION_NAMESPACE :
                 $this->modelName = trans('admin::dashboard.aside_menu.user_management.users');

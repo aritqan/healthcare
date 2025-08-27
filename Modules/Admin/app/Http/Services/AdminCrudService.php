@@ -2,32 +2,48 @@
 
 namespace Modules\Admin\Http\Services;
 
+use Modules\Admin\Models\Admin;
 use Silber\Bouncer\BouncerFacade;
 use Illuminate\Support\Facades\DB;
-use Modules\Admin\Models\Admin;
 use Modules\Admin\Enums\AdminStatus;
 use Modules\Admin\Events\RoleChangedEvent;
 use Modules\Admin\Models\Admin as CrudModel;
 use Modules\Base\Http\Services\BaseCrudService;
+use Modules\Nabd\Enums\MedicalFacilitesTypes;
+use Modules\Permission\Enums\SystemDefaultRoles;
+use Modules\Permission\Models\Role;
+
 class AdminCrudService extends BaseCrudService
 {
     protected $unnecessaryFieldsForCrud = [
         'avatar',
         'avatar_remove',
-        'current_password',
-        'role'
+        // 'current_password',
+        'role_id',
+        'state_id'
     ];
 
     public function createModel(array $data) : CrudModel
     {
         $modelData = $this->prepareModelData($data);
 
-        $model = DB::transaction(function () use($data, $modelData){
+        if(!isset($data['password'])) {
+            $modelData['password']         = $this->generateTempRandomPassword();
+            $modelData['password_is_temp'] = true;
+        }
+
+        $roleName = Role::where('id', $data['role_id'])->value('name');
+
+        $model = DB::transaction(function () use($data, $modelData, $roleName){
             $model = CrudModel::create($modelData);
 
-            BouncerFacade::assign($data['role'])->to($model);
+            BouncerFacade::assign($data['role_id'])->to($model);
 
             $this->uploadImageForModel($model, $data, Admin::MEDIA_COLLECTION, 'avatar');
+
+            if($roleName != SystemDefaultRoles::SYSTEM_ADMIN_ROLE){
+                $this->createOrUpdateProfile($model, $data, $roleName);
+            }
 
             return $model;
         });
@@ -37,13 +53,15 @@ class AdminCrudService extends BaseCrudService
 
     public function updateModel(CrudModel $model, array $data) : CrudModel
     {
-        if(is_null($data['password'])){
+        if(isset($data['password']) && is_null($data['password'])){
             unset($data['password']);
         }
 
         $modelData = $this->prepareModelData($data);
 
-        DB::transaction(function () use($data, $model, $modelData){
+        $roleName = Role::where('id', $data['role_id'])->value('name');
+
+        DB::transaction(function () use($data, $model, $modelData, $roleName){
             $model->update($modelData);
 
             if(isset($data['avatar_remove']) && $data['avatar_remove'] == true){
@@ -56,9 +74,13 @@ class AdminCrudService extends BaseCrudService
                 $this->removeFcmToken($model);
             }
 
-            if (isset($data['role'])) {
-                $this->changeRole($model, $data['role']);
+            if($roleName != SystemDefaultRoles::SYSTEM_ADMIN_ROLE){
+                $this->createOrUpdateProfile($model, $data, $roleName);
             }
+
+            // if (isset($data['role'])) {
+            //     $this->changeRole($model, $data['role']);
+            // }
         });
 
         return $model;
@@ -91,4 +113,35 @@ class AdminCrudService extends BaseCrudService
 
         if(config('audit.enabled')) event(new RoleChangedEvent($model, $oldRole->name, app('admin')->id));
     }
+
+    private function generateTempRandomPassword() : string
+    {
+        return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(16 / strlen($x)) )),1,16);
+    }
+
+    private function createOrUpdateProfile(CrudModel $model, $data, $roleName) : void
+    {
+        switch ($roleName) {
+            case SystemDefaultRoles::CLINIC:
+                $type = MedicalFacilitesTypes::CLINIC->value;
+                break;
+            case SystemDefaultRoles::PHARMACY:
+                $type = MedicalFacilitesTypes::PHARMACY->value;
+                break;
+            default:
+                $type = null;
+        }
+
+        if(!$type) return;
+
+        $model->profile()->updateOrCreate(
+            [
+                'type' => $type
+            ],
+            [
+                'state_id'  => $data['state_id'],
+            ]
+        );
+    }
+
 }
