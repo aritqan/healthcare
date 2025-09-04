@@ -1,8 +1,14 @@
 <?php
 
 use Illuminate\Support\Str;
+use Modules\Admin\Models\Admin;
 use Nwidart\Modules\Facades\Module;
+use Illuminate\Auth\Middleware\Authenticate;
 use Modules\Permission\Enums\SystemDefaultRoles;
+use Modules\Admin\Enums\permissions\AdminPermissions;
+use Modules\Admin\Enums\permissions\ClinicPermissions;
+use Modules\Admin\Enums\permissions\DoctorPermissions;
+use Modules\Admin\Enums\permissions\PharmacyPermissions;
 
 if (!function_exists('dashboardSetItem')) {
     /**
@@ -99,6 +105,30 @@ if (!function_exists('getModuleNameFromModel')) {
     }
 }
 
+if(! function_exists('adminPermissionClassMapping')) {
+    /**
+     * @param string $roleName
+     * @return mixed
+     */
+    function adminPermissionClassMapping(string $roleName): mixed
+    {
+        switch (strtoupper($roleName)) {
+            case SystemDefaultRoles::SYSTEM_ADMIN_ROLE:
+                return AdminPermissions::class;
+            case SystemDefaultRoles::CLINIC:
+                return ClinicPermissions::class;
+            case SystemDefaultRoles::PHARMACY:
+                return PharmacyPermissions::class;
+            case SystemDefaultRoles::DOCTOR:
+                return DoctorPermissions::class;
+            case SystemDefaultRoles::PHARMACIST:
+                return PharmacyPermissions::class;
+            default:
+                return null;
+        }
+    }
+}
+
 if(! function_exists('checkIfRoleStateRequired')) {
     /**
      * @param string $roleName
@@ -129,5 +159,16 @@ if(! function_exists('checkIfRoleMedicalFacilityRequired')) {
     function checkIfRoleMedicalFacilityRequired(string $roleName): bool
     {
         return in_array(strtoupper($roleName), [SystemDefaultRoles::DOCTOR, SystemDefaultRoles::PHARMACIST]);
+    }
+}
+
+if(! function_exists('checkIfRoleCanSelectMedicalFacility')) {
+    /**
+     * @param string $roleName
+     * @return bool
+     */
+    function checkIfRoleCanSelectMedicalFacility(Authenticate|Admin $user): bool
+    {
+        return $user->isA(SystemDefaultRoles::SYSTEM_ADMIN_ROLE) || $user->isA(SystemDefaultRoles::ROOT_ROLE);
     }
 }

@@ -34,6 +34,10 @@ class AdminCrudService extends BaseCrudService
             $modelData['password_is_temp'] = true;
         }
 
+        if(! isset($data['medical_facility_id']) && ! checkIfRoleCanSelectMedicalFacility(app('admin'))) {
+            $data['medical_facility_id'] = app('admin')->profile?->id;
+        }
+
         $roleName = Role::where('id', $data['role_id'])->value('name');
 
         $model = DB::transaction(function () use($data, $modelData, $roleName){
@@ -70,6 +74,10 @@ class AdminCrudService extends BaseCrudService
     {
         if(isset($data['password']) && is_null($data['password'])){
             unset($data['password']);
+        }
+
+        if(! isset($data['medical_facility_id']) && ! checkIfRoleCanSelectMedicalFacility(app('admin'))) {
+            $data['medical_facility_id'] = app('admin')->profile?->id;
         }
 
         $modelData = $this->prepareModelData($data);

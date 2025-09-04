@@ -235,9 +235,9 @@ class Admin extends User implements HasMedia, Auditable
         ->exceptCurrentAdmin()
         ->withDisabled();
 
-        // dd($data['role'], $model->get());
+        $permissionClass = adminPermissionClassMapping($data['role']);
 
-        if($this->shouldShowTrash($data, AdminPermissions::VIEW_TRASH)) {
+        if($this->shouldShowTrash($data, $permissionClass::VIEW_TRASH)) {
             $model = $model->onlyTrashed();
         }
 
@@ -253,7 +253,7 @@ class Admin extends User implements HasMedia, Auditable
                     $query->advancedSearch($data['advanced_search']);
                 }
             })
-            ->addColumn('actions', function ($model) use($canLoginToAnotherAccount, $additionalActions, $data){
+            ->addColumn('actions', function ($model) use($canLoginToAnotherAccount, $additionalActions, $data, $permissionClass){
                 $excludeActions = [VIEW_ACTION];
 
                 if($canLoginToAnotherAccount) {
@@ -264,7 +264,7 @@ class Admin extends User implements HasMedia, Auditable
                     app('customDataTable')
                     ->routePrefix('admin.admins')
                     ->setRouteParameters(['role' => $data['role']])
-                    ->of($model, AdminPermissions::PERMISSION_NAMESPACE)
+                    ->of($model, $permissionClass::PERMISSION_NAMESPACE)
                     ->excludeActions($excludeActions)
                     ->getDatatableActions(additionalActions: $additionalActions, withMainCrudActions: true);
             })

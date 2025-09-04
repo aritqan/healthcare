@@ -175,7 +175,7 @@
                                 </div>
 
                                 <div class="row">
-                                    @if(checkIfRoleMedicalFacilityRequired(e(request('role'))))
+                                    @if(checkIfRoleCanSelectMedicalFacility(app('admin')) && checkIfRoleMedicalFacilityRequired(e(request('role'))))
                                         <div @class(['col-12 mb-10 form-group'])>
                                             @include('admin::components.inputs.select', [
                                                 'options'           => [

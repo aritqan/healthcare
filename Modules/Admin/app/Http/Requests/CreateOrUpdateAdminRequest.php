@@ -33,7 +33,7 @@ class CreateOrUpdateAdminRequest extends BaseRequest
             'gender'                => [Rule::requiredIf(fn() => checkIfRoleGenderRequired($this->role)), 'nullable', 'in:' . implode(',', Gender::all())],
             'role_id'               => ['required', 'exists:roles,id'],
             'state_id'              => [Rule::requiredIf(fn() => checkIfRoleStateRequired($this->role)), 'nullable', 'exists:states,id'],
-            'medical_facility_id'   => [Rule::requiredIf(fn() => checkIfRoleMedicalFacilityRequired($this->role)), 'nullable', 'exists:medical_facilities,id'],
+            'medical_facility_id'   => [Rule::requiredIf(fn() => checkIfRoleCanSelectMedicalFacility(app('admin')) && checkIfRoleMedicalFacilityRequired($this->role)), 'nullable', 'exists:medical_facilities,id'],
         ];
 
         // if($this->isUpdate()) {

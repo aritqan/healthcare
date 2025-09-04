@@ -46,7 +46,7 @@ class AdminCrudController extends BaseCrudController
     {
         if(app()->runningInConsole()) return [];
 
-        $permissionClass = self::permissionMapping(e(request('role')));
+        $permissionClass = adminPermissionClassMapping(e(request('role')));
 
         if(is_null($permissionClass)) return [];
 
@@ -82,29 +82,11 @@ class AdminCrudController extends BaseCrudController
         parent::__construct();
     }
 
-    protected static function permissionMapping($role)
-    {
-        switch (strtoupper($role)) {
-            case SystemDefaultRoles::SYSTEM_ADMIN_ROLE:
-                return AdminPermissions::class;
-            case SystemDefaultRoles::CLINIC:
-                return ClinicPermissions::class;
-            case SystemDefaultRoles::PHARMACY:
-                return PharmacyPermissions::class;
-            case SystemDefaultRoles::DOCTOR:
-                return DoctorPermissions::class;
-            case SystemDefaultRoles::PHARMACIST:
-                return PharmacyPermissions::class;
-            default:
-                return null;
-        }
-    }
-
     public function datatable(Request $request)
     {
         $request->merge(['role' => $this->role]);
 
-        return $this->model->getDataTable($request->all());
+        return $this->model->getDataTable($request->all(), $this);
     }
 
     public function getMedicalFacility(Request $request)
