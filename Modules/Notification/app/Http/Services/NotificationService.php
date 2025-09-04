@@ -245,6 +245,10 @@ class NotificationService extends BaseCrudService
             $this->sendFcmPushNotification($user, $model, false, $template->priority, $data['title'], $data['body'], $extraData);
         }
 
+        if(in_array(NotificationChannels::MAIL, $template->channels)){
+            $this->sendEmailNotification($user->email, $user->username, $model, $template->priority, $data['title'], $data['body'], $extraData);
+        }
+
         return sendSuccessInternalResponse();
     }
 

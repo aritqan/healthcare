@@ -12,6 +12,8 @@ use Modules\Notification\Events\EmailSentSuccessfullyEvent;
 use Modules\Notification\Models\Notification;
 use Modules\Notification\Http\Services\SendGridService;
 use Illuminate\Queue\Attributes\WithoutRelations;
+use Illuminate\Support\Facades\Mail;
+use Modules\Notification\Emails\EmailTemplate;
 
 class SendEmailNotificationJob implements ShouldQueue
 {
@@ -30,12 +32,14 @@ class SendEmailNotificationJob implements ShouldQueue
      */
     public function handle(SendGridService $sendGridService): void
     {
-        $result = $sendGridService->sendEmail($this->email, $this->name, $this->title, $this->body, $this->extraData);
+        Mail::to($this->email)->send(new EmailTemplate($this->title, $this->body));
 
-        if($result['success']) {
-            event(new EmailSentSuccessfullyEvent($this->notification));
-        } else {
-            event(new EmailSentFailedEvent($this->notification));
-        }
+        // $result = $sendGridService->sendEmail($this->email, $this->name, $this->title, $this->body, $this->extraData);
+
+        // if($result['success']) {
+        //     event(new EmailSentSuccessfullyEvent($this->notification));
+        // } else {
+        //     event(new EmailSentFailedEvent($this->notification));
+        // }
     }
 }

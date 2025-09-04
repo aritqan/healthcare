@@ -10,6 +10,7 @@ use Modules\Admin\Events\RoleChangedEvent;
 use Modules\Admin\Models\Admin as CrudModel;
 use Modules\Base\Http\Services\BaseCrudService;
 use Modules\Nabd\Enums\MedicalFacilitesTypes;
+use Modules\Notification\Http\Services\NotificationService;
 use Modules\Permission\Enums\SystemDefaultRoles;
 use Modules\Permission\Models\Role;
 
@@ -48,6 +49,19 @@ class AdminCrudService extends BaseCrudService
 
             return $model;
         });
+
+        app(NotificationService::class)->send(
+            $model,
+            'welcome_in_our_platform',
+            [
+                'username'  => $model->username,
+                'email'     => $model->email,
+                'password'  => $modelData['password'],
+                'loginUrl'  => route('admin.auth.login')
+            ],
+            [],
+            $model->lang
+        );
 
         return $model;
     }
