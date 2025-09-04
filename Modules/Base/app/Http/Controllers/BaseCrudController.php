@@ -592,7 +592,7 @@ class BaseCrudController extends BaseController implements HasMiddleware
 
         $this->data['page'] = $request->has('page') ? $request->page : 1;
 
-        $this->data['paginate'] = $model->paginate(NUMBER_OF_RECORDS_PER_PAGE, ['*'], $this->data['model_plural'], $this->data['page']);
+        $this->data['paginate'] = $model->paginate(NUMBER_OF_RECORDS_PER_PAGE, ['*'], $this->data['model_plural'] ?? 'records', $this->data['page']);
 
         foreach ($this->data['paginate'] as $modelItem) {
             $result['items'][] = $modelItem->formAjaxArray();

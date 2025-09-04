@@ -20,7 +20,8 @@ class AdminCrudService extends BaseCrudService
         'avatar_remove',
         // 'current_password',
         'role_id',
-        'state_id'
+        'state_id',
+        'medical_facility_id',
     ];
 
     public function createModel(array $data) : CrudModel
@@ -128,6 +129,12 @@ class AdminCrudService extends BaseCrudService
             case SystemDefaultRoles::PHARMACY:
                 $type = MedicalFacilitesTypes::PHARMACY->value;
                 break;
+            case SystemDefaultRoles::DOCTOR:
+                $type = MedicalFacilitesTypes::DOCTOR->value;
+                break;
+            case SystemDefaultRoles::PHARMACIST:
+                $type = MedicalFacilitesTypes::PHARMACIST->value;
+                break;
             default:
                 $type = null;
         }
@@ -139,7 +146,8 @@ class AdminCrudService extends BaseCrudService
                 'type' => $type
             ],
             [
-                'state_id'  => $data['state_id'],
+                'state_id'              => $data['state_id'],
+                'medical_facility_id'   => checkIfRoleMedicalFacilityRequired($roleName) ? $data['medical_facility_id'] : null
             ]
         );
     }

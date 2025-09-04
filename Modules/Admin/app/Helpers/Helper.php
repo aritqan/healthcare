@@ -101,12 +101,33 @@ if (!function_exists('getModuleNameFromModel')) {
 
 if(! function_exists('checkIfRoleStateRequired')) {
     /**
-     * @param string $roleState
-     * @param string $roleStateRequired
+     * @param string $roleName
      * @return bool
      */
     function checkIfRoleStateRequired(string $roleName): bool
     {
         return in_array(strtoupper($roleName), [SystemDefaultRoles::CLINIC, SystemDefaultRoles::PHARMACY]);
+    }
+}
+
+if(! function_exists('checkIfRoleGenderRequired')) {
+    /**
+     * @param string $roleName
+     * @return bool
+     */
+    function checkIfRoleGenderRequired(string $roleName): bool
+    {
+        return in_array(strtoupper($roleName), [SystemDefaultRoles::DOCTOR, SystemDefaultRoles::PHARMACIST]);
+    }
+}
+
+if(! function_exists('checkIfRoleMedicalFacilityRequired')) {
+    /**
+     * @param string $roleName
+     * @return bool
+     */
+    function checkIfRoleMedicalFacilityRequired(string $roleName): bool
+    {
+        return in_array(strtoupper($roleName), [SystemDefaultRoles::DOCTOR, SystemDefaultRoles::PHARMACIST]);
     }
 }

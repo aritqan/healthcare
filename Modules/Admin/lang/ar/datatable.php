@@ -210,6 +210,12 @@ return [
         'columns'                       => [
         ],
     ],
+    'pharmacists'                       => [
+        'list_title'                    => 'قائمة الصيدليات',
+        'columns'                       => [
+
+        ]
+    ],
     'medical_specialties'               => [
         'list_title'                    => 'قائمة التخصصات الطبية',
         'columns'                       => [

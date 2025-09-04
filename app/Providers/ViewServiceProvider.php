@@ -4,26 +4,26 @@ namespace App\Providers;
 
 use Modules\Cms\Models\Content;
 use Illuminate\Support\ServiceProvider;
-use Modules\Auth\Enums\permissions\UserPermissions;
-use Modules\Admin\Enums\permissions\AdminPermissions;
 use Modules\Cms\Enums\contents\BaseContentTypes;
-use Modules\Cms\Enums\permissions\ContentCategoryPermissions;
-use Modules\Cms\Enums\permissions\ContentTagPermissions;
-use Modules\Cms\Enums\permissions\MedicalSpecialtiesPermissions;
-use Modules\Config\Enums\permissions\SettingPermissions;
-use Modules\Permission\Enums\permissions\RolePermissions;
-use Modules\Permission\Enums\permissions\AbilityPermissions;
+use Modules\Permission\Enums\SystemDefaultRoles;
+use Modules\Auth\Enums\permissions\UserPermissions;
+use Modules\Log\Enums\permissions\ApiLogPermissions;
+use Modules\Admin\Enums\permissions\AdminPermissions;
 use Modules\Zms\Enums\permissions\CountryPermissions;
+use Modules\Admin\Enums\permissions\ClinicPermissions;
+use Modules\Admin\Enums\permissions\DoctorPermissions;
 use Modules\Crm\Enums\permissions\ContactusPermissions;
 use Modules\Crm\Enums\permissions\SubscribePermissions;
-use Modules\Log\Enums\permissions\ApiLogPermissions;
-use Modules\Admin\Enums\permissions\ClinicPermissions;
-use Modules\Nabd\Enums\permissions\DoctorPermissions;
-use Modules\Nabd\Enums\permissions\MedicalSpecialtyPermissions;
 use Modules\Admin\Enums\permissions\PharmacyPermissions;
+use Modules\Cms\Enums\permissions\ContentTagPermissions;
+use Modules\Config\Enums\permissions\SettingPermissions;
+use Modules\Permission\Enums\permissions\RolePermissions;
+use Modules\Admin\Enums\permissions\PharmacistPermissions;
+use Modules\Permission\Enums\permissions\AbilityPermissions;
+use Modules\Cms\Enums\permissions\ContentCategoryPermissions;
+use Modules\Cms\Enums\permissions\MedicalSpecialtiesPermissions;
 use Modules\Notification\Enums\permissions\NotificationPermissions;
 use Modules\Notification\Enums\permissions\NotificationTemplatePermissions;
-use Modules\Permission\Enums\SystemDefaultRoles;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -666,5 +666,71 @@ class ViewServiceProvider extends ServiceProvider
             ]);
         }
         // End Pharmacy Section
+
+        // Start Doctor Section
+        app('adminHelper')->asideMenu([
+            'id'        => 'doctors_section',
+            'parent_id' => 'medical_management',
+            'type'      => 'item',
+            'icon'      => 'fa-solid fa-user-doctor',
+            'title'     => trans('admin::dashboard.aside_menu.user_management.doctors'),
+            'order'     => 8,
+        ]);
+
+        if (app('owner') || app('admin')->can(DoctorPermissions::READ)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'view_doctors',
+                'parent_id' => 'doctors_section',
+                'type'      => 'item',
+                'link'      => route('admin.admins.index', ['role' => SystemDefaultRoles::DOCTOR]),
+                'title'     => trans('admin::base.view_all'),
+                'order'     => 4,
+            ]);
+        }
+
+        if (app('owner') || app('admin')->can(DoctorPermissions::CREATE)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'create_doctors',
+                'parent_id' => 'doctors_section',
+                'type'      => 'item',
+                'link'      => route('admin.admins.create', ['role' => SystemDefaultRoles::DOCTOR]),
+                'title'     => trans('admin::base.create_new'),
+                'order'     => 4,
+            ]);
+        }
+        // End Doctor Section
+
+        // Start Pharmacist Section
+        app('adminHelper')->asideMenu([
+            'id'        => 'pharmacists_section',
+            'parent_id' => 'medical_management',
+            'type'      => 'item',
+            'icon'      => 'fa-solid fa-flask',
+            'title'     => trans('admin::dashboard.aside_menu.user_management.pharmacists'),
+            'order'     => 8,
+        ]);
+
+        if (app('owner') || app('admin')->can(PharmacistPermissions::READ)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'view_pharmacists_section',
+                'parent_id' => 'pharmacists_section',
+                'type'      => 'item',
+                'link'      => route('admin.admins.index', ['role' => SystemDefaultRoles::PHARMACIST]),
+                'title'     => trans('admin::base.view_all'),
+                'order'     => 4,
+            ]);
+        }
+
+        if (app('owner') || app('admin')->can(PharmacistPermissions::CREATE)) {
+            app('adminHelper')->asideMenu([
+                'id'        => 'create_pharmacists_section',
+                'parent_id' => 'pharmacists_section',
+                'type'      => 'item',
+                'link'      => route('admin.admins.create', ['role' => SystemDefaultRoles::PHARMACIST]),
+                'title'     => trans('admin::base.create_new'),
+                'order'     => 4,
+            ]);
+        }
+        // End Pharmacist Section
     }
 }

@@ -23,6 +23,7 @@ return [
             'clinics'                       => 'Clinics',
             'doctors'                       => 'Doctors',
             'pharmacies'                    => 'Pharmacies',
+            'pharmacists'                   => 'Pharmacists',
         ],
         'zone_management'                   => [
             'title'                         => 'Zone Management',

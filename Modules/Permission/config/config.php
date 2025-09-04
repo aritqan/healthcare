@@ -11,6 +11,14 @@ return [
             'name'                                  => 'medical_specialty',
             'icon'                                  => 'fa-solid fa-kit-medical',
         ],
+        'pharmacist'                                => [
+            'name'                                  => 'pharmacist',
+            'icon'                                  => 'fa-solid fa-flask',
+        ],
+        'doctor'                                    => [
+            'name'                                  => 'doctor',
+            'icon'                                  => 'fa-solid fa-user-doctor',
+        ],
         'pharmacy'                                  => [
             'name'                                  => 'pharmacy',
             'icon'                                  => 'fa-solid fa-prescription-bottle',

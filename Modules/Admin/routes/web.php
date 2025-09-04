@@ -62,4 +62,6 @@ Route::prefix('admins/{role}')->name('admins.')->controller(AdminCrudController:
     Route::post('bulk-restore'                  , 'bulkRestore')->name('bulkRestore');
     Route::post('bulk-disable'                  , 'bulkDisable')->name('bulkDisable');
     Route::post('bulk-enable'                   , 'bulkEnable')->name('bulkEnable');
+
+    Route::get('get-medical-facility'           , 'getMedicalFacility')->name('getMedicalFacility');
 })->whereIn('role', SystemDefaultRoles::all());

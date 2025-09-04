@@ -487,7 +487,7 @@ return [
     'clinic_crud'                   => [
         'name'                      => [
             'label'                 => 'Name',
-            'placeholder'           => 'Please enter a Name',
+            'placeholder'           => 'Please enter Name',
             'help'                  => 'Enter a Name (required)',
         ],
         'address'                   => [
@@ -504,6 +504,22 @@ return [
             'label'                 => 'City',
             'placeholder'           => 'Please select a City',
             'help'                  => 'Select a City (required)',
+        ],
+    ],
+
+    'doctor_crud'                   => [
+        'medical_facility'          => [
+            'label'                 => 'Please select the clinic to which the doctor belongs',
+            'placeholder'           => 'Please select a Clinic',
+            'help'                  => 'Select a Clinic (required)',
+        ],
+    ],
+
+    'pharmacist_crud'               => [
+        'medical_facility'          => [
+            'label'                 => 'Please select the pharmacy to which the pharmacist belongs',
+            'placeholder'           => 'Please select a Pharmacy',
+            'help'                  => 'Select a Pharmacy (required)',
         ],
     ],
 ];

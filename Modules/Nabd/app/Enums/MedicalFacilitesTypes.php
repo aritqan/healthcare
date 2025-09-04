@@ -11,4 +11,6 @@ enum MedicalFacilitesTypes: string
 
     case CLINIC     = 'clinic';
     case PHARMACY   = 'pharmacy';
+    case DOCTOR     = 'doctor';
+    case PHARMACIST = 'pharmacist';
 }

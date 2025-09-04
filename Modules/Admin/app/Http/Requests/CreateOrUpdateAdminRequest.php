@@ -30,9 +30,10 @@ class CreateOrUpdateAdminRequest extends BaseRequest
             'email'                 => ['required', 'email', 'max:255', Rule::unique('admins', 'email')->ignore($this->model)],
             'phone_number'          => ['required', 'string', 'min:5', 'max:255', Rule::unique('admins', 'phone_number')->ignore($this->model)],
             // 'password'              => ['confirmed', Password::defaults()],
-            'gender'                => ['nullable', 'in:' . implode(',', Gender::all())],
+            'gender'                => [Rule::requiredIf(fn() => checkIfRoleGenderRequired($this->role)), 'nullable', 'in:' . implode(',', Gender::all())],
             'role_id'               => ['required', 'exists:roles,id'],
             'state_id'              => [Rule::requiredIf(fn() => checkIfRoleStateRequired($this->role)), 'nullable', 'exists:states,id'],
+            'medical_facility_id'   => [Rule::requiredIf(fn() => checkIfRoleMedicalFacilityRequired($this->role)), 'nullable', 'exists:medical_facilities,id'],
         ];
 
         // if($this->isUpdate()) {

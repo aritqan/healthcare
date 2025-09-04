@@ -23,6 +23,7 @@ return [
             'clinics'                       => 'العيادات',
             'doctors'                       => 'الاطباء',
             'pharmacies'                    => 'الصيدليات',
+            'pharmacists'                   => 'الصيادلة',
         ],
         'zone_management'                   => [
             'title'                         => 'إدارة المناطق',

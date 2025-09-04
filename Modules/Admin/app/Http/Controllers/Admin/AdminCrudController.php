@@ -12,6 +12,7 @@ use Modules\Admin\Http\Services\AdminCrudService;
 use Modules\Admin\Enums\permissions\AdminPermissions;
 use Modules\Base\Http\Controllers\BaseCrudController;
 use Modules\Admin\Enums\permissions\ClinicPermissions;
+use Modules\Admin\Enums\permissions\DoctorPermissions;
 use Modules\Admin\Enums\permissions\PharmacyPermissions;
 use Modules\Admin\Http\Requests\CreateOrUpdateAdminRequest;
 
@@ -47,6 +48,8 @@ class AdminCrudController extends BaseCrudController
 
         $permissionClass = self::permissionMapping(e(request('role')));
 
+        if(is_null($permissionClass)) return [];
+
         return array_merge(['active.admin'], [
             new Middleware('need.permissions:' . $permissionClass::READ,        only : ['index', 'datatable', 'ajaxList']),
             new Middleware('need.permissions:' . $permissionClass::VIEW,        only : ['view', 'viewAsModal']),
@@ -60,20 +63,21 @@ class AdminCrudController extends BaseCrudController
         ]);
     }
 
-
     public function __construct(Admin $model, AdminCrudService $crudService, protected Role $roles)
     {
         if(app()->runningInConsole()) return;
 
         $this->role  = e(request('role'));
 
-        app('adminHelper')->addBreadcrumbs(trans('admin::dashboard.aside_menu.user_management.' . Str::plural(strtolower($this->role))), route($this->routePrefix . '.index', ['role' => $this->role]));
-
         $this->model            = $model;
         $this->crudService      = $crudService;
         $this->routeParameters  = ['role' => $this->role];
         $this->data['roles']    = $this->roles->where('name', $this->role)->get();
         $this->data['roleName'] = Str::plural(strtolower($this->role));
+
+        if(empty($this->role)) return;
+
+        app('adminHelper')->addBreadcrumbs(trans('admin::dashboard.aside_menu.user_management.' . Str::plural(strtolower($this->role))), route($this->routePrefix . '.index', ['role' => $this->role]));
 
         parent::__construct();
     }
@@ -87,8 +91,12 @@ class AdminCrudController extends BaseCrudController
                 return ClinicPermissions::class;
             case SystemDefaultRoles::PHARMACY:
                 return PharmacyPermissions::class;
+            case SystemDefaultRoles::DOCTOR:
+                return DoctorPermissions::class;
+            case SystemDefaultRoles::PHARMACIST:
+                return PharmacyPermissions::class;
             default:
-                return 'Modules\\Admin\\Enums\\permissions\\' . Str::studly($role) . 'Permissions';
+                return null;
         }
     }
 
@@ -97,5 +105,24 @@ class AdminCrudController extends BaseCrudController
         $request->merge(['role' => $this->role]);
 
         return $this->model->getDataTable($request->all());
+    }
+
+    public function getMedicalFacility(Request $request)
+    {
+        if($request->role == SystemDefaultRoles::DOCTOR) {
+            $this->data['model'] = $this->model::clinics();
+            $roleName = SystemDefaultRoles::CLINIC;
+        } else {
+            $this->data['model'] = $this->model::pharmacies();
+            $roleName = SystemDefaultRoles::PHARMACY;
+        }
+
+        if ($request->has('q')) {
+            $term = trim($request->q);
+
+            $this->data['model'] = $this->data['model']->simpleSearch($term, $roleName);
+        }
+
+        return $this->formatDataForAjax($request, $this->data['model']);
     }
 }

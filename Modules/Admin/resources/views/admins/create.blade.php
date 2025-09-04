@@ -153,7 +153,7 @@
                                             ]
                                         ])
                                     </div>
-                                    <div @class(['col-lg-6 col-12 mb-10 form-group', 'd-none' => strtoupper(e(request('role'))) == SystemDefaultRoles::CLINIC || e(request('role')) == SystemDefaultRoles::PHARMACY])>
+                                    <div @class(['col-lg-6 col-12 mb-10 form-group', 'd-none' => ! checkIfRoleGenderRequired(e(request('role')))])>
                                         @include('admin::components.inputs.select', [
                                             'options'           => [
                                                 'name'          => 'gender',
@@ -168,6 +168,25 @@
                                         ])
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div @class(['col-12 mb-10 form-group', 'd-none' => ! checkIfRoleMedicalFacilityRequired(e(request('role')))])>
+                                        @include('admin::components.inputs.select', [
+                                            'options'           => [
+                                                'name'          => 'medical_facility_id',
+                                                'label'         => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.label'),
+                                                'placeholder'   => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.placeholder'),
+                                                'help'          => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.help'),
+                                                'required'      => true,
+                                                'url'           => route('admin.admins.getMedicalFacility', ['role' => e(request('role'))]),
+                                                'clearable'     => true,
+                                                'searchable'    => true,
+                                                'isAjax'        => true,
+                                            ]
+                                        ])
+                                    </div>
+                                </div>
+
 
                                 {{-- <div class="row">
                                     <div class="col-lg-6 col-12 mb-10 form-group">

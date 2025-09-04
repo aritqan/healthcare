@@ -3,13 +3,15 @@
 namespace Modules\Admin\database\factories;
 
 use Illuminate\Support\Str;
-use Silber\Bouncer\BouncerFacade;
+use Modules\Base\Enums\Gender;
 use Modules\Admin\Models\Admin;
+use Silber\Bouncer\BouncerFacade;
 use Modules\Permission\Models\Role;
+use PHPUnit\Event\Telemetry\System;
 use Modules\Admin\Enums\AdminStatus;
+use Modules\Permission\Enums\SystemDefaultRoles;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Modules\Base\Enums\Gender;
 
 class AdminFactory extends Factory
 {
@@ -49,10 +51,8 @@ class AdminFactory extends Factory
             $randomImagePath = asset('modules/admin/metronic/demo/media/avatars/300-'. rand(1, 30) .'.jpg');
             $admin->addMediaFromUrl($randomImagePath)->toMediaCollection(Admin::MEDIA_COLLECTION);
 
-            $roles = Role::inRandomOrder()->limit(rand(1, 5))->get();
-            $roles->each(function ($role) use ($admin) {
-                BouncerFacade::assign($role)->to($admin);
-            });
+            $role = Role::inRandomOrder()->first();
+            BouncerFacade::assign($role)->to($admin);
         });
     }
 }

@@ -148,13 +148,24 @@ class Admin extends User implements HasMedia, Auditable
     {
         return $this->hasOne(MedicalFacility::class)->where('type', MedicalFacilitesTypes::PHARMACY);
     }
+
+    public function doktor(): HasOne
+    {
+        return $this->hasOne(MedicalFacility::class)->where('type', MedicalFacilitesTypes::DOCTOR);
+    }
+
+    public function pharmacist(): HasOne
+    {
+        return $this->hasOne(MedicalFacility::class)->where('type', MedicalFacilitesTypes::PHARMACIST);
+    }
     // End Relationships
 
     // Start Scopes
-    public function scopeSimpleSearch($query, $search)
+    public function scopeSimpleSearch($query, $search, ?string $role)
     {
-        return
-        $query->whereAny(
+        return $query
+        ->when(!empty($role), fn($q) => $q->whereIs($role))
+        ->whereAny(
             ['id', 'full_name', 'username', 'phone_number', 'email'],
             'LIKE',
             '%' . $search . '%'
@@ -178,6 +189,16 @@ class Admin extends User implements HasMedia, Auditable
     {
         return $query->where('id', '!=', app('admin')->id);
     }
+
+    public function scopeClinics($query)
+    {
+        return $query->whereIs(SystemDefaultRoles::CLINIC);
+    }
+
+    public function scopePharmacies($query)
+    {
+        return $query->whereIs(SystemDefaultRoles::PHARMACY);
+    }
     // End Scopes
 
     // Start Get Data From Model
@@ -185,8 +206,8 @@ class Admin extends User implements HasMedia, Auditable
     public function formAjaxArray($selected = true)
     {
         return [
-            'id'            => $this->id,
-            'text'          => $this->email,
+            'id'            => $this->profile?->id,
+            'text'          => $this->full_name,
             'selected'      => $selected
         ];
     }
@@ -209,10 +230,12 @@ class Admin extends User implements HasMedia, Auditable
     public function getDataTable(array $data) : JsonResponse
     {
         $model = $this::with('roles.translations')
-        ->whereIs($data['role'] ?? SystemDefaultRoles::SYSTEM_ADMIN_ROLE)
+        ->whereIs($data['role'])
         ->exceptRoot()
         ->exceptCurrentAdmin()
         ->withDisabled();
+
+        // dd($data['role'], $model->get());
 
         if($this->shouldShowTrash($data, AdminPermissions::VIEW_TRASH)) {
             $model = $model->onlyTrashed();

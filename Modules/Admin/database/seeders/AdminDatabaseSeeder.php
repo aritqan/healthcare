@@ -15,7 +15,7 @@ class AdminDatabaseSeeder extends Seeder
         $this->call([
             AdminSeeder::class,
         ]);
-        $this->seedFakeAdmins();
+        // $this->seedFakeAdmins();
     }
 
     private function seedFakeAdmins(): void

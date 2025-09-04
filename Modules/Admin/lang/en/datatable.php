@@ -209,6 +209,12 @@ return [
         'columns'                       => [
         ],
     ],
+    'pharmacists'                       => [
+        'list_title'                    => 'Pharmacists List',
+        'columns'                       => [
+
+        ]
+    ],
     'medical_specialties'               => [
         'list_title'                    => 'Medical Specialties List',
         'columns'                       => [
