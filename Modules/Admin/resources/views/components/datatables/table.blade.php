@@ -20,7 +20,8 @@
         ], $options);
 
         $tableId        = "#" . $VALUE['id'];
-        $orderIndex     = $VALUE['withCheckbox'] ? 1 : 0;
+        // $orderIndex     = $VALUE['withCheckbox'] ? 1 : 0;
+        $orderIndex     = 0;
     @endphp
 
     <table id="{{$VALUE['id']}}" class="{{$VALUE['class']}}">

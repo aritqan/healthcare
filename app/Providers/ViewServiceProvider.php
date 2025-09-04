@@ -44,12 +44,12 @@ class ViewServiceProvider extends ServiceProvider
             $this->registerDashboardAsideMenu();
             $this->registerAdminAsideMenu();
             $this->registerPermissionAsideMenu();
-            $this->regiserCmsAsideMenu();
+            // $this->regiserCmsAsideMenu();
             $this->registerZmsAsideMenu();
             $this->registerConfigAsideMenu();
-            $this->registerNotificationAsideMenu();
-            $this->registerCrmAsideMenu();
-            $this->registerLogAsideMenu();
+            // $this->registerNotificationAsideMenu();
+            // $this->registerCrmAsideMenu();
+            // $this->registerLogAsideMenu();
             $this->registerMedicalAsideMenu();
         });
     }

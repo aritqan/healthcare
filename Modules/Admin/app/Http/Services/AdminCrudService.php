@@ -146,7 +146,7 @@ class AdminCrudService extends BaseCrudService
                 'type' => $type
             ],
             [
-                'state_id'              => $data['state_id'],
+                'state_id'              => $data['state_id'] ?? null,
                 'medical_facility_id'   => checkIfRoleMedicalFacilityRequired($roleName) ? $data['medical_facility_id'] : null
             ]
         );

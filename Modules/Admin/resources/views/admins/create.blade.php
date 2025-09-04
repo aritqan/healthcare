@@ -139,52 +139,59 @@
                                 </div>
 
                                 <div class="row">
-                                    <div @class(['col-lg-6 col-12 mb-10 form-group', 'd-none' => ! checkIfRoleStateRequired(e(request('role')))])>
-                                        @include('admin::components.inputs.select', [
-                                            'options'           => [
-                                                'name'          => 'state_id',
-                                                'label'         => trans('admin::inputs.clinic_crud.state_id.label'),
-                                                'placeholder'   => trans('admin::inputs.clinic_crud.state_id.placeholder'),
-                                                'help'          => trans('admin::inputs.clinic_crud.state_id.help'),
-                                                'required'      => true,
-                                                'data'          => getStatesForCountry('SYR'),
-                                                'text'          => fn($key, $value) => $value->smartTrans('name'),
-                                                'values'        => fn($key, $value) => $value->id,
-                                            ]
-                                        ])
-                                    </div>
-                                    <div @class(['col-lg-6 col-12 mb-10 form-group', 'd-none' => ! checkIfRoleGenderRequired(e(request('role')))])>
-                                        @include('admin::components.inputs.select', [
-                                            'options'           => [
-                                                'name'          => 'gender',
-                                                'label'         => trans('admin::inputs.admin_crud.gender.label'),
-                                                'placeholder'   => trans('admin::inputs.admin_crud.gender.placeholder'),
-                                                'help'          => trans('admin::inputs.admin_crud.gender.help'),
-                                                'required'      => true,
-                                                'data'          => $genderTypes,
-                                                'text'          => fn($key, $value) => $value,
-                                                'values'        => fn($key, $value) => $key,
-                                            ]
-                                        ])
-                                    </div>
+                                    @if(checkIfRoleStateRequired(e(request('role'))))
+                                        <div @class(['col-lg-6 col-12 mb-10 form-group'])>
+                                            @include('admin::components.inputs.select', [
+                                                'options'           => [
+                                                    'name'          => 'state_id',
+                                                    'label'         => trans('admin::inputs.clinic_crud.state_id.label'),
+                                                    'placeholder'   => trans('admin::inputs.clinic_crud.state_id.placeholder'),
+                                                    'help'          => trans('admin::inputs.clinic_crud.state_id.help'),
+                                                    'required'      => true,
+                                                    'data'          => getStatesForCountry('SYR'),
+                                                    'text'          => fn($key, $value) => $value->smartTrans('name'),
+                                                    'values'        => fn($key, $value) => $value->id,
+                                                ]
+                                            ])
+                                        </div>
+                                    @endif
+
+                                    @if(checkIfRoleGenderRequired(e(request('role'))))
+                                        <div @class(['col-lg-6 col-12 mb-10 form-group'])>
+                                            @include('admin::components.inputs.select', [
+                                                'options'           => [
+                                                    'name'          => 'gender',
+                                                    'label'         => trans('admin::inputs.admin_crud.gender.label'),
+                                                    'placeholder'   => trans('admin::inputs.admin_crud.gender.placeholder'),
+                                                    'help'          => trans('admin::inputs.admin_crud.gender.help'),
+                                                    'required'      => true,
+                                                    'data'          => $genderTypes,
+                                                    'text'          => fn($key, $value) => $value,
+                                                    'values'        => fn($key, $value) => $key,
+                                                ]
+                                            ])
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="row">
-                                    <div @class(['col-12 mb-10 form-group', 'd-none' => ! checkIfRoleMedicalFacilityRequired(e(request('role')))])>
-                                        @include('admin::components.inputs.select', [
-                                            'options'           => [
-                                                'name'          => 'medical_facility_id',
-                                                'label'         => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.label'),
-                                                'placeholder'   => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.placeholder'),
-                                                'help'          => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.help'),
-                                                'required'      => true,
-                                                'url'           => route('admin.admins.getMedicalFacility', ['role' => e(request('role'))]),
-                                                'clearable'     => true,
-                                                'searchable'    => true,
-                                                'isAjax'        => true,
-                                            ]
-                                        ])
-                                    </div>
+                                    @if(checkIfRoleMedicalFacilityRequired(e(request('role'))))
+                                        <div @class(['col-12 mb-10 form-group'])>
+                                            @include('admin::components.inputs.select', [
+                                                'options'           => [
+                                                    'name'          => 'medical_facility_id',
+                                                    'label'         => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.label'),
+                                                    'placeholder'   => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.placeholder'),
+                                                    'help'          => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.help'),
+                                                    'required'      => true,
+                                                    'url'           => route('admin.admins.getMedicalFacility', ['role' => e(request('role'))]),
+                                                    'clearable'     => true,
+                                                    'searchable'    => true,
+                                                    'isAjax'        => true,
+                                                ]
+                                            ])
+                                        </div>
+                                    @endif
                                 </div>
 
 

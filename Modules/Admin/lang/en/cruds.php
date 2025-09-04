@@ -297,6 +297,14 @@ return [
         'restore'                       => 'Restore Doctor',
         'permanent_delete'              => 'Permanent Deletion Doctor',
     ],
+    'pharmacists'                       => [
+        'title'                         => 'Pharmacists',
+        'add'                           => 'Add New Pharmacist',
+        'edit'                          => 'Edit Pharmacist',
+        'delete'                        => 'Delete Pharmacist',
+        'restore'                       => 'Restore Pharmacist',
+        'permanent_delete'              => 'Permanent Deletion Pharmacist',
+    ],
     'medical-specialties'               => [
         'title'                         => 'Medical Specialists',
         'add'                           => 'Add New Medical Specialist',
@@ -304,5 +312,13 @@ return [
         'delete'                        => 'Delete Medical Specialist',
         'restore'                       => 'Restore Medical Specialist',
         'permanent_delete'              => 'Permanent Deletion Medical Specialist',
+    ],
+    'system_admins'                     => [
+        'title'                         => 'Admins',
+        'add'                           => 'Add New Admin',
+        'edit'                          => 'Edit Admin',
+        'delete'                        => 'Delete Admin',
+        'restore'                       => 'Restore Admin',
+        'permanent_delete'              => 'Permanent Deletion Admin',
     ],
 ];
