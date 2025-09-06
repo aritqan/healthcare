@@ -15,7 +15,7 @@
             ]
         ])
 
-        @slot('otherActions')
+        {{-- @slot('otherActions')
             @component('admin::components.forms.form', [
                     'options'               => [
                         'id'                => 'dashboard-form',
@@ -45,7 +45,7 @@
                     </div>
                 @endslot
             @endcomponent
-        @endslot
+        @endslot --}}
     @endcomponent
 @endsection
 
@@ -124,6 +124,7 @@
                     if (response.success && response.data.statistics) {
                         Object.values(response.data.statistics).forEach(group => {
                             group.forEach(stat => {
+                                console.log(stat);
                                 let el = $('#stat-' + stat.key);
                                 if (el.length) {
                                     el.text(stat.count);

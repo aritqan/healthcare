@@ -84,7 +84,7 @@
                         'options'               => [
                             'id'                => 'reset_password_submit',
                             'label'             => trans('admin::auth.change_password_page.reset_password'),
-                            'progress_label'    => trans('admin::base.please_wait'),
+                            'progress_label'    => trans('admin::base.please_wait_dot'),
                         ]
                     ])
                 </div>

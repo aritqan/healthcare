@@ -34,7 +34,9 @@ class DashboardController extends BaseController
             $this->data['toDate']       = Carbon::parse($dateRange[1])->format('Y-m-d');
         }
 
-        $this->getUsersData(); $this->getContentData(); $this->getCrmData();
+        $this->getUsersData();
+        $this->getContentData();
+        // $this->getCrmData();
 
         if($request->ajax()) return sendSuccessInternalResponse(data: $this->data);
 
