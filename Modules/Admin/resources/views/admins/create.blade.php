@@ -2,6 +2,7 @@
 
 @php
     use Modules\Permission\Enums\SystemDefaultRoles;
+    use Modules\Cms\Enums\contents\BaseContentTypes;
 @endphp
 
 @section('toolbar')
@@ -168,6 +169,24 @@
                                                     'data'          => $genderTypes,
                                                     'text'          => fn($key, $value) => $value,
                                                     'values'        => fn($key, $value) => $key,
+                                                ]
+                                            ])
+                                        </div>
+                                    @endif
+
+                                    @if(checkIfRoleMedicalSpecialityRequired(e(request('role'))))
+                                        <div @class(['col-lg-6 col-12 mb-10 form-group'])>
+                                            @include('admin::components.inputs.select', [
+                                                'options'           => [
+                                                    'name'          => 'medical_specialty_id',
+                                                    'label'         => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_speciality.label'),
+                                                    'placeholder'   => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_speciality.placeholder'),
+                                                    'help'          => trans('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_speciality.help'),
+                                                    'required'      => true,
+                                                    'url'           => route('cms.contents.ajaxList', ['type' => BaseContentTypes::MEDICAL_SPECIALTIES]),
+                                                    'clearable'     => true,
+                                                    'searchable'    => true,
+                                                    'isAjax'        => true,
                                                 ]
                                             ])
                                         </div>

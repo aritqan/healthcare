@@ -3,6 +3,7 @@
 namespace Modules\Nabd\Models;
 
 use Modules\Admin\Models\Admin;
+use Modules\Cms\Models\Content;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Nabd\Enums\MedicalFacilitesTypes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,6 +21,7 @@ class MedicalFacility extends Model
         'admin_id',
         'state_id',
         'type',
+        'medical_specialty_id',
         'medical_facility_id',
     ];
 
@@ -45,6 +47,11 @@ class MedicalFacility extends Model
     {
         return $this->hasMany(MedicalFacility::class, 'medical_facility_id')
             ->where('type', MedicalFacilitesTypes::PHARMACIST);
+    }
+
+    public function medicalSpecialty(): BelongsTo
+    {
+        return $this->belongsTo(Content::class, 'medical_specialty_id');
     }
 
     public function formAjaxArray($selected = true)

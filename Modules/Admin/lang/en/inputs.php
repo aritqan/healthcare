@@ -513,6 +513,11 @@ return [
             'placeholder'           => 'Please select a Clinic',
             'help'                  => 'Select a Clinic (required)',
         ],
+        'medical_speciality'        => [
+            'label'                 => 'Medical Speciality',
+            'placeholder'           => 'Please select a Medical Speciality',
+            'help'                  => 'Select a Medical Speciality (required)',
+        ],
     ],
 
     'pharmacist_crud'               => [

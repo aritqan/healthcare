@@ -172,3 +172,14 @@ if(! function_exists('checkIfRoleCanSelectMedicalFacility')) {
         return $user->isA(SystemDefaultRoles::SYSTEM_ADMIN_ROLE) || $user->isA(SystemDefaultRoles::ROOT_ROLE);
     }
 }
+
+if(! function_exists('checkIfRoleMedicalSpecialityRequired')) {
+    /**
+     * @param string $roleName
+     * @return bool
+     */
+    function checkIfRoleMedicalSpecialityRequired(string $roleName): bool
+    {
+        return in_array(strtoupper($roleName), [SystemDefaultRoles::DOCTOR]);
+    }
+}

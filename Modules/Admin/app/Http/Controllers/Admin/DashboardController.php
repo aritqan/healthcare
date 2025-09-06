@@ -63,9 +63,54 @@ class DashboardController extends BaseController
             key         : 'admin',
             label       : trans('admin::dashboard.aside_menu.user_management.admins'),
             modelClass  : Admin::class,
+            customQuery : fn($query) => $query->whereIs(SystemDefaultRoles::SYSTEM_ADMIN_ROLE),
             fromDate    : $this->data['fromDate'],
             toDate      : $this->data['toDate'],
             routeParameters: ['role' => SystemDefaultRoles::SYSTEM_ADMIN_ROLE]
+        );
+
+        $this->data['statistics']['users'][] = dashboardSetItem(
+            key         : 'admin',
+            label       : trans('admin::dashboard.aside_menu.user_management.clinics'),
+            modelClass  : Admin::class,
+            customQuery : fn($query) => $query->whereIs(SystemDefaultRoles::CLINIC),
+            fromDate    : $this->data['fromDate'],
+            toDate      : $this->data['toDate'],
+            icon        : 'fa-solid fa-stethoscope',
+            routeParameters: ['role' => SystemDefaultRoles::CLINIC],
+        );
+
+        $this->data['statistics']['users'][] = dashboardSetItem(
+            key         : 'admin',
+            label       : trans('admin::dashboard.aside_menu.user_management.pharmacies'),
+            modelClass  : Admin::class,
+            customQuery : fn($query) => $query->whereIs(SystemDefaultRoles::PHARMACY),
+            fromDate    : $this->data['fromDate'],
+            toDate      : $this->data['toDate'],
+            icon        : 'fa-solid fa-prescription-bottle',
+            routeParameters: ['role' => SystemDefaultRoles::PHARMACY]
+        );
+
+        $this->data['statistics']['users'][] = dashboardSetItem(
+            key         : 'admin',
+            label       : trans('admin::dashboard.aside_menu.user_management.doctors'),
+            modelClass  : Admin::class,
+            customQuery : fn($query) => $query->whereIs(SystemDefaultRoles::DOCTOR),
+            fromDate    : $this->data['fromDate'],
+            toDate      : $this->data['toDate'],
+            icon        : 'fa-solid fa-user-doctor',
+            routeParameters: ['role' => SystemDefaultRoles::DOCTOR]
+        );
+
+        $this->data['statistics']['users'][] = dashboardSetItem(
+            key         : 'admin',
+            label       : trans('admin::dashboard.aside_menu.user_management.pharmacists'),
+            modelClass  : Admin::class,
+            customQuery : fn($query) => $query->whereIs(SystemDefaultRoles::PHARMACIST),
+            fromDate    : $this->data['fromDate'],
+            toDate      : $this->data['toDate'],
+            icon        : 'fa-solid fa-flask',
+            routeParameters: ['role' => SystemDefaultRoles::PHARMACIST]
         );
     }
 

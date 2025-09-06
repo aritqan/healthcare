@@ -23,6 +23,7 @@ class AdminCrudService extends BaseCrudService
         'role_id',
         'state_id',
         'medical_facility_id',
+        'medical_specialty_id',
     ];
 
     public function createModel(array $data) : CrudModel
@@ -169,6 +170,7 @@ class AdminCrudService extends BaseCrudService
             ],
             [
                 'state_id'              => $data['state_id'] ?? null,
+                'medical_specialty_id'  => $data['medical_specialty_id'] ?? null,
                 'medical_facility_id'   => checkIfRoleMedicalFacilityRequired($roleName) ? $data['medical_facility_id'] : null
             ]
         );
