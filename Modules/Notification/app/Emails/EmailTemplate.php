@@ -31,7 +31,9 @@ class EmailTemplate extends Mailable
     {
         return $this
         ->subject($this->subject)
-        ->view('admin::emails.templates.template')
-        ->with('content', $this->htmlTemplate);
+        ->view('admin::emails.templates.welcomeEmail', [
+            'title'     => $this->subject,
+            'content'   => $this->htmlTemplate
+        ]);
     }
 }

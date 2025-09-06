@@ -246,7 +246,7 @@ class NotificationService extends BaseCrudService
         }
 
         if(in_array(NotificationChannels::MAIL, $template->channels)){
-            $this->sendEmailNotification($user->email, $user->username, $model, $template->priority, $data['title'], $data['body'], $extraData);
+            $this->sendEmailNotification($user->email, $user->username, $model, $template->priority, $data['title'], $data['htmlTemplate'], $extraData);
         }
 
         return sendSuccessInternalResponse();
