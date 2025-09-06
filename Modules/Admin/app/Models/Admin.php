@@ -253,6 +253,9 @@ class Admin extends User implements HasMedia, Auditable
                     $query->advancedSearch($data['advanced_search']);
                 }
             })
+            ->addColumn('medical_facility_name', function ($model) {
+                return $model?->profile?->parentFacility?->admin?->full_name;
+            })
             ->addColumn('actions', function ($model) use($canLoginToAnotherAccount, $additionalActions, $data, $permissionClass){
                 $excludeActions = [VIEW_ACTION];
 

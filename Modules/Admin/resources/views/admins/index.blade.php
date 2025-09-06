@@ -102,13 +102,19 @@
                         ]
                     ])
                     @slot('columns')
-                        <th style="width: 30%"> @lang('admin::datatable.admins.columns.user') </th>
+                        <th style="width: 25%"> @lang('admin::datatable.admins.columns.user') </th>
                         <th> @lang('admin::datatable.base_columns.phone_number') </th>
                         <th> @lang('admin::datatable.base_columns.username') </th>
-                        <th style="width: 10%"> @lang('admin::datatable.admins.columns.role') </th>
-                        <th style="width: 8%"> @lang('admin::datatable.base_columns.status') </th>
-                        <th> @lang('admin::datatable.admins.columns.last_login_at') </th>
-                        <th> @lang('admin::datatable.admins.columns.joined_date') </th>
+                        <th style="width: 10%"> @lang('admin::datatable.base_columns.status') </th>
+                        @if(checkIfRoleStateRequired(e(request('role'))))
+                            <th> @lang('admin::inputs.clinic_crud.state_id.label') </th>
+                        @endif
+                        @if(checkIfRoleMedicalSpecialityRequired(e(request('role'))))
+                            <th> @lang('admin::inputs.doctor_crud.medical_speciality.label') </th>
+                        @endif
+                        @if(checkIfRoleCanSelectMedicalFacility(app('admin')) && checkIfRoleMedicalFacilityRequired(e(request('role'))))
+                            <th>@lang('admin::inputs.'.strtolower(e(request('role'))).'_crud.medical_facility.label')</th>
+                        @endif
                     @endslot
 
                     <script>
@@ -153,19 +159,6 @@
                                 name : 'username',
                             },
                             {
-                                data : 'role_name',
-                                name : 'role_name',
-                                orderable: false,
-                                searchable: false,
-                                render: function (data, type, row, meta) {
-                                    return `
-                                       <span class="btn btn-sm btn-font-sm btn-label-info text-center w-100">
-                                            ${data}
-                                        </span>
-                                    `;
-                                }
-                            },
-                            {
                                 data : 'status_format',
                                 name : 'status_format',
                                 orderable: false,
@@ -176,28 +169,45 @@
                                     `;
                                 }
                             },
+                            @if(checkIfRoleStateRequired(e(request('role'))))
                             {
-                                data    : 'last_login_format',
-                                name    : 'last_login_format',
-                                orderable: false,
-                                searchable: false,
-                                render  : function (data, type, row, meta) {
-                                    return `
-                                        <span class="badge badge-light">${data}</span>
-                                    `;
-                                }
-                            },
-                            {
-                                data : 'created_at_format',
-                                name : 'created_at_format',
+                                data : 'profile',
+                                name : 'profile',
                                 orderable: false,
                                 searchable: false,
                                 render: function (data, type, row, meta) {
                                     return `
-                                        <span class="text-gray-600 fw-semibold">${data}</span>
+                                        <span class="btn btn-sm btn-font-sm btn-label-primary text-center w-100">${row.profile.state_name}</span>
                                     `;
                                 }
                             },
+                            @endif
+                            @if(checkIfRoleMedicalSpecialityRequired(e(request('role'))))
+                            {
+                                data : 'profile',
+                                name : 'profile',
+                                orderable: false,
+                                searchable: false,
+                                render: function (data, type, row, meta) {
+                                    return `
+                                        <span class="btn btn-sm btn-font-sm btn-label-info text-center w-100">${row.profile.medical_specialty_name}</span>
+                                    `;
+                                }
+                            },
+                            @endif
+                            @if(checkIfRoleCanSelectMedicalFacility(app('admin')) && checkIfRoleMedicalFacilityRequired(e(request('role'))))
+                            {
+                                data : 'medical_facility_name',
+                                name : 'medical_facility_name',
+                                orderable: false,
+                                searchable: false,
+                                render: function (data, type, row, meta) {
+                                    return `
+                                        <span class="btn btn-sm btn-font-sm btn-label-info text-center w-100">${data}</span>
+                                    `;
+                                }
+                            },
+                            @endif
                         @endslot
                     </script>
 

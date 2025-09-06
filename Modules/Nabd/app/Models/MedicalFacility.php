@@ -2,10 +2,12 @@
 
 namespace Modules\Nabd\Models;
 
+use Modules\Zms\Models\State;
 use Modules\Admin\Models\Admin;
 use Modules\Cms\Models\Content;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Nabd\Enums\MedicalFacilitesTypes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,9 +29,19 @@ class MedicalFacility extends Model
 
     public $timestamps = false;
 
+    protected $appends = [
+        'state_name',
+        'medical_specialty_name',
+    ];
+
     public function admin(): BelongsTo
     {
         return $this->belongsTo(Admin::class);
+    }
+
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
     }
 
     public function parentFacility(): BelongsTo
@@ -63,5 +75,19 @@ class MedicalFacility extends Model
             'text'          => $text,
             'selected'      => $selected
         ];
+    }
+
+    protected function stateName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => !empty($state = $this->state) ? $state->smartTrans('name') : '----',
+        );
+    }
+
+    protected function medicalSpecialtyName(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => !empty($medicalSpecialty = $this->medicalSpecialty) ? $medicalSpecialty->smartTrans('title') : '----',
+        );
     }
 }

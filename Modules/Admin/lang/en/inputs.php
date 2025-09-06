@@ -509,7 +509,7 @@ return [
 
     'doctor_crud'                   => [
         'medical_facility'          => [
-            'label'                 => 'Please select the clinic to which the doctor belongs',
+            'label'                 => 'The clinic the doctor belongs to',
             'placeholder'           => 'Please select a Clinic',
             'help'                  => 'Select a Clinic (required)',
         ],
@@ -522,7 +522,7 @@ return [
 
     'pharmacist_crud'               => [
         'medical_facility'          => [
-            'label'                 => 'Please select the pharmacy to which the pharmacist belongs',
+            'label'                 => 'The pharmacy to which the pharmacist belongs',
             'placeholder'           => 'Please select a Pharmacy',
             'help'                  => 'Select a Pharmacy (required)',
         ],
