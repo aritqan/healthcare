@@ -11,7 +11,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif;
-            direction: rtl;
+            direction: {{ $direction }};
         }
         body {
             background-color: #f5f7fa;
@@ -87,7 +87,7 @@
         .login-button {
             display: block;
             background: #4a6fdc;
-            color: #FFF;
+            color: #FFF !important;
             text-align: center;
             padding: 16px;
             border-radius: 8px;

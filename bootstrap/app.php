@@ -31,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Append Web Middleware
         $middleware->web([
             \Modules\Admin\Http\Middleware\SystemUserInfo::class,
+            \Modules\Admin\Http\Middleware\PasswordIsNotTemp::class
         ]);
 
         // Append API Middleware

@@ -69,6 +69,9 @@ return [
         'this_action_is_not_allowed_in_production'                  => 'هذا الإجراء غير مسموح به في بيئة اللايف.',
         'reply_sent_successfully'                                   => 'تم إرسال الرد بنجاح.',
         'error_occured_while_fetching_data'                         => 'حدث خطأ أثناء جلب البيانات. يرجى المحاولة مرة أخرى لاحقًا.',
+        'new_password_cannot_be_same_as_old_password'               => 'عذرًا، الرقم السري الجديد لا يمكن ان يكون نفس الرقم السري القديم. يرجى التحقق من معلوماتك والمحاولة مرة أخرى.',
+        'password_is_not_temp'                                      => 'لا يمكنك تغيير كلمة المرور لانها غير مؤقتة.',
+        'password_updated_successfully'                             => 'تم تحديث كلمة المرور بنجاح.',
     ],
     'api_response_messages'                                         => [
         'user_registered_successfully'                              => 'تم تسجيل المستخدم بنجاح.',

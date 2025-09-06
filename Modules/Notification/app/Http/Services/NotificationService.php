@@ -246,7 +246,7 @@ class NotificationService extends BaseCrudService
         }
 
         if(in_array(NotificationChannels::MAIL, $template->channels)){
-            $this->sendEmailNotification($user->email, $user->username, $model, $template->priority, $data['title'], $data['htmlTemplate'], $extraData);
+            $this->sendEmailNotification($user->email, $user->username, $model, $template->priority, $data['title'], $data['htmlTemplate'], $locale, $extraData);
         }
 
         return sendSuccessInternalResponse();
@@ -440,9 +440,9 @@ class NotificationService extends BaseCrudService
      * @param array $extraData
      * @return void
      */
-    public function sendEmailNotification(string $email, string $name, CrudModel $notification, mixed $queue = NotificationPriority::DEFAULT, string $title, string $body, array $extraData = [])
+    public function sendEmailNotification(string $email, string $name, CrudModel $notification, mixed $queue = NotificationPriority::DEFAULT, string $title, string $body, string $locale, array $extraData = [])
     {
-        SendEmailNotificationJob::dispatch($email, $name, $notification, $title, $body, $extraData)->onQueue($queue);
+        SendEmailNotificationJob::dispatch($email, $name, $notification, $title, $body, $locale, $extraData)->onQueue($queue);
     }
 
     /**

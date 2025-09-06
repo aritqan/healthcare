@@ -67,7 +67,9 @@ return [
         'this_action_is_not_allowed_in_production'                  => 'This action is not allowed in production environment.',
         'reply_sent_successfully'                                   => 'Reply sent successfully.',
         'error_occured_while_fetching_data'                         => 'An error occurred while fetching data. Please try again later.',
-
+        'new_password_cannot_be_same_as_old_password'               => 'Sorry, the new password cannot be the same as the old password.',
+        'password_is_not_temp'                                      => 'You cannot change your password because your password is not temporary.',
+        'password_updated_successfully'                             => 'Password updated successfully.',
     ],
     'api_response_messages'                                         => [
         'user_registered_successfully'                              => 'User registered successfully.',

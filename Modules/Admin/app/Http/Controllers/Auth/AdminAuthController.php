@@ -3,7 +3,9 @@
 namespace Modules\Admin\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Modules\Base\Http\Controllers\BaseController;
+use Modules\Admin\Http\Requests\UpdatePasswordRequest;
 
 class AdminAuthController extends BaseController
 {
@@ -70,5 +72,34 @@ class AdminAuthController extends BaseController
         $request->session()->regenerateToken();
 
         return sendSuccessResponse(route('admin.auth.login'), 'logout_success');
+    }
+
+    public function changePassword(Request $request)
+    {
+        if(! auth()->guard('admin')->user()->password_is_temp){
+            return redirect()->route('admin.auth.login');
+        }
+
+        return view('admin::auth.change_password');
+    }
+
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $user = $request->user();
+
+        if(! $user->password_is_temp){
+            return sendFailResponse('password_is_not_temp');
+        }
+
+        if(Hash::check($request->password, $user->password)){
+            return sendFailResponse('new_password_cannot_be_same_as_old_password');
+        }
+
+        $user->update([
+            'password'          => $request->password,
+            'password_is_temp'  => false
+        ]);
+
+        return sendSuccessResponse(route('admin.dashboard.index'), 'password_updated_successfully');
     }
 }

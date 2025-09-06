@@ -9,6 +9,12 @@ return [
         'sign_in'                   => 'تسجيل الدخول',
     ],
 
+    'change_password_page'          => [
+        'meta_title'                => 'تغيير كلمة المرور',
+        'change_password'           => 'تغيير كلمة المرور',
+        'reset_password'            => 'إعادة تعيين كلمة المرور',
+    ],
+
     'profile_page'                  => [
         'meta_title'                => 'الملف الشخصي',
         'profile'                   => 'الملف الشخصي',

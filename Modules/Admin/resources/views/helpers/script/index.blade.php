@@ -1037,6 +1037,7 @@
 @if (session('message'))
     <script>
         let data = @json(session('message'));
+        console.log(data);
         hanldeNotify(data);
     </script>
 @endif

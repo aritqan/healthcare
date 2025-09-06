@@ -30,7 +30,12 @@ Route::name('auth.')->controller(AdminAuthController::class)->group(function() {
         Route::get('login'          , 'showLoginForm')->name('login');
         Route::post('authenticate'  , 'authenticate')->name('authenticate');
     });
-    Route::get('logout' , 'logout')->name('logout')->middleware('auth:admin');
+
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('logout'             , 'logout')->name('logout');
+        Route::get('change-password'    , 'changePassword')->name('changePassword');
+        Route::post('update-password'   , 'updatePassword')->name('updatePassword');
+    });
 });
 
 // Profile Section

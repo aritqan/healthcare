@@ -15,13 +15,16 @@ class EmailTemplate extends Mailable
 
     public $subject;
 
+    public $locale;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($subject, $htmlTemplate)
+    public function __construct($subject, $htmlTemplate, $locale)
     {
         $this->subject = $subject;
         $this->htmlTemplate = $htmlTemplate;
+        $this->locale = $locale;
     }
 
     /**
@@ -33,7 +36,8 @@ class EmailTemplate extends Mailable
         ->subject($this->subject)
         ->view('admin::emails.templates.welcomeEmail', [
             'title'     => $this->subject,
-            'content'   => $this->htmlTemplate
+            'content'   => $this->htmlTemplate,
+            'direction' => $this->locale == 'ar' ? 'rtl' : 'ltr'
         ]);
     }
 }

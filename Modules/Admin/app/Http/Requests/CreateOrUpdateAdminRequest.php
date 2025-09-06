@@ -7,11 +7,8 @@ use Modules\Base\Enums\Gender;
 use Illuminate\Validation\Rules\File;
 use Modules\Admin\Enums\AdminStatus;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\Rules\RequiredIf;
 use Modules\Base\Http\Requests\BaseRequest;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Modules\Permission\Enums\SystemDefaultRoles;
-use Symfony\Contracts\Service\Attribute\Required;
 
 class CreateOrUpdateAdminRequest extends BaseRequest
 {

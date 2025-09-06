@@ -22,7 +22,7 @@ class SendEmailNotificationJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(private string $email, private string $name, #[WithoutRelations] private Notification $notification, private string $title, private string $body, private array $extraData = [])
+    public function __construct(private string $email, private string $name, #[WithoutRelations] private Notification $notification, private string $title, private string $body, private string $locale = 'ar', private array $extraData = [])
     {
 
     }
@@ -32,7 +32,7 @@ class SendEmailNotificationJob implements ShouldQueue
      */
     public function handle(SendGridService $sendGridService): void
     {
-        Mail::to($this->email)->send(new EmailTemplate($this->title, $this->body));
+        Mail::to($this->email)->send(new EmailTemplate($this->title, $this->body, $this->locale));
 
         // $result = $sendGridService->sendEmail($this->email, $this->name, $this->title, $this->body, $this->extraData);
 

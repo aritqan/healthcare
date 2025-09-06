@@ -9,6 +9,12 @@ return [
         'sign_in'                   => 'Sign in',
     ],
 
+    'change_password_page'          => [
+        'meta_title'                => 'Change Password',
+        'change_password'           => 'Change Password',
+        'reset_password'            => 'Reset Password',
+    ],
+
     'profile_page'                  => [
         'meta_title'                => 'Profile',
         'profile'                   => 'Profile',
