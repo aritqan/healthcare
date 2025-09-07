@@ -1,5 +1,6 @@
 @php
     use Modules\Cms\Models\Content;
+    use Modules\Cms\Enums\contents\BaseContentTypes;
 @endphp
 
 @extends('admin::layouts.master', [
@@ -57,7 +58,7 @@
                             'url'           => route('cms.contents.datatable', ['type' => $type]),
                             'withCheckbox'  => true,
                             'filter'        => true,
-                            'withCreatedAt' => true,
+                            'withCreatedAt' => $type == BaseContentTypes::MEDICAL_SPECIALTIES ? false : true,
                         ]
                     ])
                     @slot('columns')

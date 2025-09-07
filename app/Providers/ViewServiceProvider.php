@@ -397,36 +397,36 @@ class ViewServiceProvider extends ServiceProvider
         // End Notification Template Section
 
         // Start Notification Section
-        app('adminHelper')->asideMenu([
-            'id'        => 'notification_section',
-            'parent_id' => 'notification_management',
-            'type'      => 'item',
-            'icon'      => 'fas fa-bell',
-            'title'     => trans('admin::dashboard.aside_menu.notification_management.notifications'),
-            'order'     => 4,
-        ]);
+        // app('adminHelper')->asideMenu([
+        //     'id'        => 'notification_section',
+        //     'parent_id' => 'notification_management',
+        //     'type'      => 'item',
+        //     'icon'      => 'fas fa-bell',
+        //     'title'     => trans('admin::dashboard.aside_menu.notification_management.notifications'),
+        //     'order'     => 4,
+        // ]);
 
-        if (app('owner') || (app('admin')->can(NotificationPermissions::READ))) {
-            app('adminHelper')->asideMenu([
-                'id'        => 'view_notifications',
-                'parent_id' => 'notification_section',
-                'type'      => 'item',
-                'link'      => route('notification.notifications.index'),
-                'title'     => trans('admin::base.view_all'),
-                'order'     => 4,
-            ]);
-        }
+        // if (app('owner') || (app('admin')->can(NotificationPermissions::READ))) {
+        //     app('adminHelper')->asideMenu([
+        //         'id'        => 'view_notifications',
+        //         'parent_id' => 'notification_section',
+        //         'type'      => 'item',
+        //         'link'      => route('notification.notifications.index'),
+        //         'title'     => trans('admin::base.view_all'),
+        //         'order'     => 4,
+        //     ]);
+        // }
 
-        if (app('owner') || app('admin')->can(NotificationPermissions::CREATE)) {
-            app('adminHelper')->asideMenu([
-                'id'        => 'create_notification',
-                'parent_id' => 'notification_section',
-                'type'      => 'item',
-                'link'      => route('notification.notifications.create'),
-                'title'     => trans('admin::base.create_new'),
-                'order'     => 5,
-            ]);
-        }
+        // if (app('owner') || app('admin')->can(NotificationPermissions::CREATE)) {
+        //     app('adminHelper')->asideMenu([
+        //         'id'        => 'create_notification',
+        //         'parent_id' => 'notification_section',
+        //         'type'      => 'item',
+        //         'link'      => route('notification.notifications.create'),
+        //         'title'     => trans('admin::base.create_new'),
+        //         'order'     => 5,
+        //     ]);
+        // }
         // End Notification Section
     }
 

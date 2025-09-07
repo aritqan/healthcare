@@ -24,7 +24,9 @@ return [
         'clinic_management'                 => 'Clinic Management',
         'pharmacy_management'               => 'Pharmacy Management',
         'doctor_management'                 => 'Doctor Management',
+        'pharmacist_management'             => 'Pharmacist Management',
         'medical-specialties_management'    => 'Medical Specialties Management',
+        'medical_specialty_management'      => 'Medical Specialties Management',
     ],
 
     'roles'                                 => [

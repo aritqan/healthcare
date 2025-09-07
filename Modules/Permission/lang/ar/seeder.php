@@ -24,7 +24,9 @@ return [
         'clinic_management'                 => 'إدارة العيادات',
         'pharmacy_management'               => 'إدارة الصيدليات',
         'doctor_management'                 => 'إدارة الأطباء',
+        'pharmacist_management'             => 'إدارة الصيادلة',
         'medical-specialties_management'    => 'إدارة التخصصات الطبية',
+        'medical_specialty_management'      => 'إدارة التخصصات الطبية',
     ],
 
     'roles'                                 => [
