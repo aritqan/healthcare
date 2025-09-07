@@ -53,22 +53,22 @@ return [
         'clinic'                            => [
             'name'                          => 'CLINIC',
             'title'                         => 'Clinic',
-            'description'                   => 'There are no default permissions for this group',
+            'description'                   => 'All safe permissions are added by default to this group',
         ],
         'pharmacy'                          => [
             'name'                          => 'PHARMACY',
             'title'                         => 'Pharmacy',
-            'description'                   => 'There are no default permissions for this group',
+            'description'                   => 'All safe permissions are added by default to this group',
         ],
         'doctor'                            => [
             'name'                          => 'DOCTOR',
             'title'                         => 'Doctor',
-            'description'                   => 'There are no default permissions for this group',
+            'description'                   => 'All safe permissions are added by default to this group',
         ],
         'pharmacist'                        => [
             'name'                          => 'PHARMACIST',
             'title'                         => 'Pharmacist',
-            'description'                   => 'There are no default permissions for this group',
+            'description'                   => 'All safe permissions are added by default to this group',
         ],
     ],
 
